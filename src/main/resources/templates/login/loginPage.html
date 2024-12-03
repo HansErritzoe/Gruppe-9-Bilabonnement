@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="http://localhost:35729/livereload.js"></script>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/base.css">
+    <link rel="stylesheet" href="/components.css">
+    <link rel="stylesheet" href="/layout.css">
+    <link rel="stylesheet" href="/pagespecific/loginpage.css">
+</head>
+<body>
+<div id="login_box">
+    <h1> Bilabonnement A/S</h1>
+    <div id="login_box_form_div">
+        <form action="/login" method="post">
+            <h2> Medarbejder Login </h2>
+            <p> Brugernavn</p>
+            <input type="text" name="username" placeholder="Indtast brugernavn" required>
+            <p> Password</p>
+            <input type="text" name="username" placeholder="Indtast password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div>
+        <div th:if="${errorMessage}" class="error" th:text="${errorMessage}"></div>
+    </div>
+</div>
+
+</body>
+</html>
