@@ -35,8 +35,7 @@ public class HomeController {
      */
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model){
-        User user = (User) session.getAttribute("loggedInUser"); //get's User object
-        if(user != null){ //checks User object not null before displaying
+        if(userIsLoggedIn(session)){
             return "dashboard/dashboard";
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
@@ -80,6 +79,17 @@ public class HomeController {
         session.invalidate(); //deletes session data
         model.addAttribute("loggedOutMessage","Du er nu logget ud.");
         return "login/loginPage";
+    }
+
+    /**
+     * method for checking if user is logged in before displaying any pages other than login page
+     * @param session session to be checked for User object
+     * @return true if logged in, false if not
+     * Author - Hans Erritzøe
+     */
+    public boolean userIsLoggedIn(HttpSession session){
+        User user = (User) session.getAttribute("loggedInUser");
+        return user != null;
     }
 
 }
