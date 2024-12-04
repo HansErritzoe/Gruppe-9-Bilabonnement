@@ -30,12 +30,18 @@ public class HomeController {
 
     /**
      * Method for returning the dashboard address - this is the default landing page once a user has logged in
-     * @return string with dashboard.html address
+     * @return string with dashboard address if user is logged in, else sends user to login page with error message
      * Author - Hans Erritzøe
      */
     @GetMapping("/dashboard")
-    public String dashboard(){
-        return "dashboard/dashboard";
+    public String dashboard(HttpSession session, Model model){
+        User user = (User) session.getAttribute("loggedInUser"); //get's User object
+        if(user != null){ //checks User object not null before displaying
+            return "dashboard/dashboard";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
     }
 
     /**
@@ -52,13 +58,11 @@ public class HomeController {
                 User user = userService.retrieveUserByUsername(username);
                 session.setAttribute("loggedInUser", user);
                 return "dashboard/dashboard";
-                //if username and password don't match, display errormessage
-            } else {
+            } else { //if username and password don't match, display errormessage
                 model.addAttribute("loginErrorMessage", "Brugernavn og password matcher ikke - Kontakt admin hvis du har glemt dit kodeord eller brugernavn");
                 return "login/loginPage";
             }
-            //if username doesnt exists, display errormessage
-        } else {
+        } else { //if username doesnt exists, display errormessage
             model.addAttribute("loginErrorMessage", "Brugernavn eksisterer ikke - Kontakt admin hvis du har glemt dit brugernavn");
             return "login/loginPage";
         }
@@ -74,7 +78,7 @@ public class HomeController {
     @PostMapping("/logout")
     public String logout(HttpSession session, Model model){
         session.invalidate(); //deletes session data
-        model.addAttribute("loggedOutMessage","Du er nu logget ud");
+        model.addAttribute("loggedOutMessage","Du er nu logget ud.");
         return "login/loginPage";
     }
 
