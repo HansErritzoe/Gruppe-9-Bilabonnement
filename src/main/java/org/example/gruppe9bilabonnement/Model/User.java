@@ -2,24 +2,25 @@ package org.example.gruppe9bilabonnement.Model;
 
 /**
  * This class is used to create User objects for handling login
+ * Author - Hans Erritzøe
  */
 public class User {
 
-    private int id;
+    private int id_user;
     private String username;
     private String password;
-    private String fornavn;
-    private String efternavn;
+    private String firstname;
+    private String lastname;
 
     public User() {
     }
 
-    public int getId() {
-        return id;
+    public int getId_user() {
+        return id_user;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
 
     public String getUsername() {
@@ -38,19 +39,19 @@ public class User {
         this.password = password;
     }
 
-    public String getFornavn() {
-        return fornavn;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFornavn(String fornavn) {
-        this.fornavn = fornavn;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getEfternavn() {
-        return efternavn;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setEfternavn(String efternavn) {
-        this.efternavn = efternavn;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 }

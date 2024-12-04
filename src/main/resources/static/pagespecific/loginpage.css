@@ -1,3 +1,6 @@
+/* CSS Code Specific for the login page */
+/* Author: Hans Erritzøe */
+
 body {
     margin: 0;
     min-height: 100vh;
@@ -16,10 +19,11 @@ body {
     border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 1.7%;
-    min-width: 25vw;
+    width: 25vw;
+    min-width: 300px;
     min-height: 70vh;
-    max-width: 90vw;
-    max-height: 90vh;
+    max-width: 100vw;
+    overflow: auto;
 }
 
 #login_box h1 {
@@ -27,12 +31,15 @@ body {
     margin-right: 0;
     margin-top: 1.5%;
     margin-bottom: 7%;
-    font-size: 2.8rem;
+    font-size: 2.6rem;
     text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-wrap: normal;
 }
 
 #login_box h2 {
-    font-size: 2.2rem;
+    font-size: 1.9rem;
     text-align: left;
     margin-top: 0;
     margin-bottom: 5%;
@@ -47,7 +54,7 @@ body {
 }
 
 #login_box_form_div p {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: bolder;
     margin-bottom: 0.2%;
     margin-top: 0.2%;
@@ -80,4 +87,12 @@ body {
 
 #login_box_form_div button:hover {
     background-color: #154965;
+}
+
+.loginErrorMessage {
+    color: red;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-wrap: normal;
+    text-align: center;
 }

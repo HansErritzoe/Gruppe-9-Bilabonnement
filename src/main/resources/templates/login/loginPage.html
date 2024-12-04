@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+        Author: Hans Erritzøe
+        Created: 4/12-2024
+        Description: Login page for Bilabonnement A/S
+        Version: 1.0
+      -->
     <script src="http://localhost:35729/livereload.js"></script>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -18,14 +24,12 @@
             <p> Brugernavn</p>
             <input type="text" name="username" placeholder="Indtast brugernavn" required>
             <p> Password</p>
-            <input type="text" name="username" placeholder="Indtast password" required>
+            <input type="password" name="password" placeholder="Indtast password" required>
             <button type="submit">Login</button>
         </form>
     </div>
-    <div>
-        <div th:if="${errorMessage}" class="error" th:text="${errorMessage}"></div>
-    </div>
+    <!-- Displays appropriate error message if fails to login -->
+    <div th:if="${loginErrorMessage}" class="loginErrorMessage" th:text="${loginErrorMessage}"></div>
 </div>
-
 </body>
 </html>
