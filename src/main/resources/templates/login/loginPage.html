@@ -29,7 +29,9 @@
         </form>
     </div>
     <!-- Displays appropriate error message if fails to login -->
-    <div th:if="${loginErrorMessage}" class="loginErrorMessage" th:text="${loginErrorMessage}"></div>
+    <div th:if="${loginErrorMessage}" id="loginErrorMessage" th:text="${loginErrorMessage}"></div>
+    <!-- Display logged out message if user has successfully logged out-->
+    <div th:if="${loggedOutMessage}" id="loggedOutMessage" th:text="${loggedOutMessage}"> </div>
 </div>
 </body>
 </html>

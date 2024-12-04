@@ -42,7 +42,7 @@ public class HomeController {
      * Method for handling when a user attempts to login
      * Checks if user exists, if so, checks if username and password match, if so, add User object to HttpSession
      * and proceed to dashboard page, if either checks fail, displays error message
-     * @return String with dashboard page if successfull, login page if fail so user can try again
+     * @return String with dashboard page if successfull, login page with error message if fail
      * Author - Hans Erritzøe (partially taken from previous project i've made)
      */
     @PostMapping("/login")
@@ -62,6 +62,20 @@ public class HomeController {
             model.addAttribute("loginErrorMessage", "Brugernavn eksisterer ikke - Kontakt admin hvis du har glemt dit brugernavn");
             return "login/loginPage";
         }
+    }
+
+    /**
+     * Method for logging user out by invalidating session data
+     * @param session - HttpSession object wherein the User object is stored
+     * @param model - Model used for adding the loggedOutMessage
+     * @return - string with login page address
+     * * Author - Hans Erritzøe (partially taken from previous project i've made)
+     */
+    @PostMapping("/logout")
+    public String logout(HttpSession session, Model model){
+        session.invalidate(); //deletes session data
+        model.addAttribute("loggedOutMessage","Du er nu logget ud");
+        return "login/loginPage";
     }
 
 }
