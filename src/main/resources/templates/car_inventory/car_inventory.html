@@ -24,7 +24,10 @@
             <button type="submit">Søg</button>
         </form>
         <a th:if="${filterOn} == true" href="/car_inventory" class="clear_search_button">
-            <button> Ryd filter</button>
+            <button>Ryd filter</button>
+        </a>
+        <a href="/car_inventory/add_car" id="add_car_button">
+            <button>Tilføj Bil</button>
         </a>
     </div>
     <table>

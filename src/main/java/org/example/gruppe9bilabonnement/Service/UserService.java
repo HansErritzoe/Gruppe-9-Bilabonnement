@@ -16,7 +16,7 @@ public class UserService {
      * Checks if username exist in DB via repository class
      * @param username - username to be checked if exists (String)
      * @return true if exists, false if not
-     * * Author - Hans Erritzøe - Taken partially from another project i've made
+     * Author - Hans Erritzøe - Taken partially from another project i've made
      */
     public boolean doesUsernameExist(String username) {
         return userRepository.doesUsernameExist(username);

@@ -33,8 +33,9 @@ public class HomeController {
     public String login(HttpSession session){
         if(userIsLoggedIn(session)){
             return "dashboard/dashboard";
+        } else {
+            return "login/loginPage";
         }
-        return "login/loginPage";
     }
 
 
@@ -53,8 +54,54 @@ public class HomeController {
         }
     }
 
+
     /**
-     * Method for returning the car_inventory html file address, this html file displays a list of cars in the inventory
+     * Method for handling creating a new car in the database submitted by the user
+     * @param session HTTPSession object used for checking that user is logged in
+     * @param springModel normally just called model, but to avoid conflict with model for car parameter, named springModel
+     * @param @RequestParams - There is many @Requestparams here to handle passing all the data for creating the car object
+     * @return
+     * Author - Hans Erritzøe
+     */
+    @PostMapping("car_inventory/add_car")
+    public String addCar(HttpSession session, Model springModel, @RequestParam String VIN, @RequestParam String brand,
+                         @RequestParam String model, @RequestParam int year, @RequestParam String owner,
+                         @RequestParam int km_driven,@RequestParam double km_price, @RequestParam double monthly_price,
+                         @RequestParam boolean available){
+        if(userIsLoggedIn(session)){
+            Car newCar = new Car(VIN,brand,model,year,owner,km_driven,km_price,monthly_price,available);
+            boolean success = carService.addCar(newCar);
+            if(success){
+                springModel.addAttribute("successMessage","Success! Bilen er nu tilføjet til databasen");
+            } else {
+                springModel.addAttribute("errorMessage", "Fejl! Kunne ikke tilføje bilen til databasen, prøv igen eller kontakt admin for hjælp");
+            }
+            return "/car_inventory/add_car";
+        } else {
+            springModel.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for displaying the add_car html page where user can add cars to the database
+     * @param session - HTTPSession object used for checking that user is logged in
+     * @param model - Model object used for displaying error message if user attempts to access without loggin in
+     * @return string - returns the string of the html file address with the add_car page or login if not logged in
+     * Author - Hans Erritzøe
+     */
+    @GetMapping("/car_inventory/add_car")
+    public String addCar(HttpSession session, Model model){
+        if(userIsLoggedIn(session)){
+            return "/car_inventory/add_car";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for returning the car_inventory html file address
      * @return string with car_inventory address if user is logged in, else sends user to login page with error message
      * Author - Hans Erritzøe
      */

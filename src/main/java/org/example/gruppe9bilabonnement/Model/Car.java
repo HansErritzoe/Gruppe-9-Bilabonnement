@@ -20,6 +20,18 @@ public class Car {
     public Car() {
     }
 
+    public Car(String VIN, String brand, String model, int year, String owner, int km_driven, double km_price, double monthly_price, boolean available) {
+        this.VIN = VIN;
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.owner = owner;
+        this.km_driven = km_driven;
+        this.km_price = km_price;
+        this.monthly_price = monthly_price;
+        this.available = available;
+    }
+
     public int getId_vehicle() {
         return id_vehicle;
     }

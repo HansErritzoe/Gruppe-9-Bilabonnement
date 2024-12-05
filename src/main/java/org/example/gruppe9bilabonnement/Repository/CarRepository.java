@@ -2,6 +2,7 @@ package org.example.gruppe9bilabonnement.Repository;
 
 import org.example.gruppe9bilabonnement.Model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -42,5 +43,26 @@ public class CarRepository {
                 """;
         RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
         return template.query(sql,rowMapper, query, "%"+query+"%", query);
+    }
+
+    /**
+     * TODO write when completed
+     * @param car
+     * @return
+     */
+    public boolean addCar(Car car){
+        String sql = """
+                    INSERT INTO car (VIN, brand, model, year, owner, km_driven, km_price, monthly_price, available)
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """;
+        try {
+            int rowsAffected = template.update(sql, car.getVIN(), car.getBrand(), car.getModel(), car.getYear(), car.getOwner(),
+                    car.getKm_driven(), car.getKm_price(), car.getMonthly_price(), car.isAvailable());
+            return rowsAffected > 0;
+        } catch (DataAccessException errorMessage){
+            //could add logging the error here
+            return false;
+        }
+
     }
 }
