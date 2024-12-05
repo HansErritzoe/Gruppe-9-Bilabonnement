@@ -1,0 +1,13 @@
+html,body,header{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --primary-color: #0A3F53;
+    --seconday-color: #0E5875;
+    --accent: #1892C3;
+    --background: #F1F1F2;
+    --text-color: white;
+}

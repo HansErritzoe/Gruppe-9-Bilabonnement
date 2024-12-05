@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common-head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.jpg" type="image/x-icon">
+    <title th:text="${title}">Default Title</title> <!-- Metode til at tilføje default header er fundet på https://dev.to/saladlam/how-thymeleaf-processes-value-of-thtext-attribute-3faa-->
+    <link rel="stylesheet" type="text/css" href="base.css">
+    <link rel="stylesheet" type="text/css" href="/pagespecific/template.css">
+</head>
+<body>
+<!--
+      Author: Jonas Jakobsen
+      Created: 4/12-2024
+      Description: Layout template for al webpages
+      Version: 1.0
+-->
+
+
+<!-- Header -->
+<div th:fragment="header">
+    <header>
+           Bilabonnoment A/S
+        <form action="/logout" method="post">
+            <button type="submit" id="logout-button">Log ud</button>
+        </form>
+    </header>
+</div>
+
+<!-- Navigation Bar -->
+<div th:fragment="navbar">
+    <nav>
+            <a href="/dashboard/dashboard" class="nav-button">Dashboard</a>
+            <a href="/lager" class="nav-button">Biler</a>
+            <a href="/lejeaftaler" class="nav-button">Lejeaftaler</a>
+            <a href="/skadesrapporter"class="nav-button">Skadesrapporter</a>
+            <a href="/købsaftaler"class="nav-button">Købsaftaler</a>
+            <a href="/tilstandsrapport"class="nav-button">Tilstandsrapport</a>
+    </nav>
+</div>
+
+<!-- Main Content Placeholder -->
+<main th:fragment="content">
+
+</main>
+</body>
+</html>
