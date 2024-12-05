@@ -25,12 +25,15 @@ public class HomeController {
 
 
     /**
-     * method for returning the login page for when user isn't logged in
-     * @return string with html page location/name
+     * method for returning the login page for when user isn't logged in, returns dashboard if logged in
+     * @return string with html page location/name (either login page if not logged in, or dashboard if logged in)
      * Author - Hans Erritzøe
      */
     @GetMapping("/")
-    public String login(){
+    public String login(HttpSession session){
+        if(userIsLoggedIn(session)){
+            return "dashboard/dashboard";
+        }
         return "login/loginPage";
     }
 
@@ -60,6 +63,7 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             List<Car> cars = carService.getAllCars();
             model.addAttribute("cars",cars);
+            model.addAttribute("filterOn",false);
             return "car_inventory/car_inventory";
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");

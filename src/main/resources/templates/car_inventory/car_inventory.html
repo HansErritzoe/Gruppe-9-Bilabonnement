@@ -17,15 +17,15 @@
 </head>
 <body>
 <main th:fragment="content">
-<h1>Biler</h1>
+    <h1>Biler</h1>
     <div>
-    <form action="/car_inventory_search" method="post">
-        <input type="text" name="query" placeholder="Søg på vogn/stelnummer" />
-        <button type="submit">Søg</button>
-    </form>
-    <a th:if="${filterOn}" href="/car_inventory" class="clear_search_button">
-        <button> Ryd filter </button>
-    </a>
+        <form action="/car_inventory_search" method="post">
+            <input type="text" name="query" placeholder="Søg på vogn/stelnummer"/>
+            <button type="submit">Søg</button>
+        </form>
+        <a th:if="${filterOn} == true" href="/car_inventory" class="clear_search_button">
+            <button> Ryd filter</button>
+        </a>
     </div>
     <table>
         <thead>
