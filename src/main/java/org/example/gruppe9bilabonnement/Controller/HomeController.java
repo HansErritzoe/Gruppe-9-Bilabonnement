@@ -63,7 +63,6 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             List<Car> cars = carService.getAllCars();
             model.addAttribute("cars",cars);
-            model.addAttribute("filterOn",false);
             return "car_inventory/car_inventory";
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
@@ -72,18 +71,20 @@ public class HomeController {
     }
 
     /**
-     * TODO beskriv når færdig
-     * @param query
-     * @param session
-     * @param model
-     * @return
+     * Method for returning the car_inventory html page with the search result when user
+     * attempts to search for cars in the database on either id_vehicle or VIN
+     * @param query - vehicle id or VIN for car to be searched for in DB
+     * @param session - HTTPSession object used for checking that user is logged in
+     * @param model - Model used for adding Car list to be displayed and filterOn true in order to display "clear filter" button
+     * @return String - returns car_inventory string with search result added to model or login page if not logged in
+     * Author - Hans Erritzøe
      */
     @PostMapping("/car_inventory_search")
     public String car_inventory_search(@RequestParam String query,HttpSession session, Model model){
         if(userIsLoggedIn(session)){
             List<Car> cars = carService.getCarsByIdOrVIN(query);
             model.addAttribute("cars",cars);
-            model.addAttribute("filterOn", true);
+            model.addAttribute("filterOn", true); //enables displaying the "clear filter" button
             return "car_inventory/car_inventory";
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
