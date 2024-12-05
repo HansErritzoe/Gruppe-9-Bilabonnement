@@ -1,6 +1,8 @@
 package org.example.gruppe9bilabonnement.Controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.example.gruppe9bilabonnement.Model.Car;
+import org.example.gruppe9bilabonnement.Service.CarService;
 import org.example.gruppe9bilabonnement.Service.UserService;
 import org.example.gruppe9bilabonnement.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class HomeController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    CarService carService;
 
 
     /**
