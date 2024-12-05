@@ -36,7 +36,7 @@ public class HomeController {
 
 
     /**
-     * Method for returning the dashboard address - this is the default landing page once a user has logged in
+     * Method for returning the dashboard html file address - this is the default landing page once a user has logged in
      * @return string with dashboard address if user is logged in, else sends user to login page with error message
      * Author - Hans Erritzøe
      */
@@ -49,6 +49,44 @@ public class HomeController {
             return "login/loginPage";
         }
     }
+
+    /**
+     * Method for returning the car_inventory html file address, this html file displays a list of cars in the inventory
+     * @return string with car_inventory address if user is logged in, else sends user to login page with error message
+     * Author - Hans Erritzøe
+     */
+    @GetMapping("/car_inventory")
+    public String car_inventory(HttpSession session, Model model){
+        if(userIsLoggedIn(session)){
+            List<Car> cars = carService.getAllCars();
+            model.addAttribute("cars",cars);
+            return "car_inventory/car_inventory";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * TODO beskriv når færdig
+     * @param query
+     * @param session
+     * @param model
+     * @return
+     */
+    @PostMapping("/car_inventory_search")
+    public String car_inventory_search(@RequestParam String query,HttpSession session, Model model){
+        if(userIsLoggedIn(session)){
+            List<Car> cars = carService.getCarsByIdOrVIN(query);
+            model.addAttribute("cars",cars);
+            model.addAttribute("filterOn", true);
+            return "car_inventory/car_inventory";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
 
     /**
      * Method for handling when a user attempts to login

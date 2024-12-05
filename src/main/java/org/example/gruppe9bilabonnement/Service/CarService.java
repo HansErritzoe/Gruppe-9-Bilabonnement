@@ -23,4 +23,13 @@ public class CarService {
         return carRepository.getAllCars();
     }
 
+    /**
+     * Method to return a list of cars, where the query matches exactly the vehicle_id or all partial VIN matches
+     * @param query - vehicle_id or VIN to be searched for
+     * @return List<Car> - list of cars matching either exactly vehicle_id or all partial VIN matches in DB
+     * Author - Hans Erritzøe
+     */
+    public List<Car> getCarsByIdOrVIN(String query) {
+        return carRepository.getCarsByIdOrVin(query);
+    }
 }
