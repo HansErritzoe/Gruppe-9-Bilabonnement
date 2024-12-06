@@ -2,7 +2,7 @@ package org.example.gruppe9bilabonnement.Model;
 
 /**
  * This class is used to create User objects for handling login
- * Author - Hans Erritzøe
+ * @Author Hans Erritzøe
  */
 public class User {
 

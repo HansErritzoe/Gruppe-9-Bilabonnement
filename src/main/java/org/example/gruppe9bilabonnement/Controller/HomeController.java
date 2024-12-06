@@ -27,7 +27,7 @@ public class HomeController {
     /**
      * method for returning the login page for when user isn't logged in, returns dashboard if logged in
      * @return string with html page location/name (either login page if not logged in, or dashboard if logged in)
-     * Author - Hans Erritzøe
+     * @Author Hans Erritzøe
      */
     @GetMapping("/")
     public String login(HttpSession session){
@@ -42,7 +42,7 @@ public class HomeController {
     /**
      * Method for returning the dashboard html file address - this is the default landing page once a user has logged in
      * @return string with dashboard address if user is logged in, else sends user to login page with error message
-     * Author - Hans Erritzøe
+     * @Author Hans Erritzøe
      */
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model){
@@ -60,8 +60,8 @@ public class HomeController {
      * @param session HTTPSession object used for checking that user is logged in
      * @param springModel normally just called model, but to avoid conflict with model for car parameter, named springModel
      * @param @RequestParams - There is many @Requestparams here to handle passing all the data for creating the car object
-     * @return
-     * Author - Hans Erritzøe
+     * @return returns the add_car html page with either success or errormessage
+     * @Author Hans Erritzøe
      */
     @PostMapping("car_inventory/add_car")
     public String addCar(HttpSession session, Model springModel, @RequestParam String VIN, @RequestParam String brand,
@@ -88,7 +88,7 @@ public class HomeController {
      * @param session - HTTPSession object used for checking that user is logged in
      * @param model - Model object used for displaying error message if user attempts to access without loggin in
      * @return string - returns the string of the html file address with the add_car page or login if not logged in
-     * Author - Hans Erritzøe
+     * @Author Hans Erritzøe
      */
     @GetMapping("/car_inventory/add_car")
     public String addCar(HttpSession session, Model model){
@@ -103,7 +103,7 @@ public class HomeController {
     /**
      * Method for returning the car_inventory html file address
      * @return string with car_inventory address if user is logged in, else sends user to login page with error message
-     * Author - Hans Erritzøe
+     * @Author Hans Erritzøe
      */
     @GetMapping("/car_inventory")
     public String car_inventory(HttpSession session, Model model){
@@ -124,7 +124,7 @@ public class HomeController {
      * @param session - HTTPSession object used for checking that user is logged in
      * @param model - Model used for adding Car list to be displayed and filterOn true in order to display "clear filter" button
      * @return String - returns car_inventory string with search result added to model or login page if not logged in
-     * Author - Hans Erritzøe
+     * @Author Hans Erritzøe
      */
     @PostMapping("/car_inventory_search")
     public String car_inventory_search(@RequestParam String query,HttpSession session, Model model){
@@ -145,7 +145,7 @@ public class HomeController {
      * Checks if user exists, if so, checks if username and password match, if so, add User object to HttpSession
      * and proceed to dashboard page, if either checks fail, displays error message
      * @return String with dashboard page if successfull, login page with error message if fail
-     * Author - Hans Erritzøe (partially taken from previous project i've made)
+     * @Author Hans Erritzøe (partially taken from previous project i've made)
      */
     @PostMapping("/login")
     public String attemptLogin(Model model, HttpSession session, @RequestParam String username, @RequestParam String password){
@@ -169,7 +169,7 @@ public class HomeController {
      * @param session - HttpSession object wherein the User object is stored
      * @param model - Model used for adding the loggedOutMessage
      * @return - string with login page address
-     * * Author - Hans Erritzøe (partially taken from previous project i've made)
+     * @Author Hans Erritzøe (partially taken from previous project i've made)
      */
     @PostMapping("/logout")
     public String logout(HttpSession session, Model model){
@@ -182,7 +182,7 @@ public class HomeController {
      * method for checking if user is logged in before displaying any pages other than login page
      * @param session session to be checked for User object
      * @return true if logged in, false if not
-     * Author - Hans Erritzøe
+     * @Author Hans Erritzøe
      */
     public boolean userIsLoggedIn(HttpSession session){
         User user = (User) session.getAttribute("loggedInUser");

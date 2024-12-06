@@ -20,7 +20,7 @@ public class CarRepository {
     /**
      * Method for returning a list of all cars from the DB
      * @return List<Car> - list of all cars in List format
-     * Author - Hans Erritzøe - TODO Spørg cay om de her metoder som er inspireret/næsten 100% taget fra hans undervisningsmateriale skal beskrives som "taget fra..." eller om de er så boilerplate at der ingen vej udenom at de ligner
+     * @Author Hans Erritzøe - TODO Spørg cay om de her metoder som er inspireret/næsten 100% taget fra hans undervisningsmateriale skal beskrives som "taget fra..." eller om de er så boilerplate at der ingen vej udenom at de ligner
      */
     public List<Car> getAllCars(){
         String sql = "SELECT * FROM car";
@@ -33,7 +33,7 @@ public class CarRepository {
      * The second select statement in the union is only run if the "not exists" sub-query evaluates to true
      * @param query - the users search query
      * @return List<Car> - List of car objects matching either the exact id_vehicle or all partial VIN matches
-     * Author - Hans Erritzøe
+     * @Author Hans Erritzøe
      */
     public List<Car> getCarsByIdOrVin(String query) {
         String sql = """
@@ -46,9 +46,10 @@ public class CarRepository {
     }
 
     /**
-     * TODO write when completed
-     * @param car
-     * @return
+     * Method for adding the car to the database, returns false if failure, true if not
+     * @param car - car to be added to the database
+     * @return boolean - false if failed to add car to db, true if added successfully
+     * @Author Hans Erritzøe
      */
     public boolean addCar(Car car){
         String sql = """

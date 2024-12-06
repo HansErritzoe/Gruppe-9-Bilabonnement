@@ -2,7 +2,7 @@ package org.example.gruppe9bilabonnement.Model;
 
 /**
  * Car class used to create Car objects from the mysql database using RowMapper to be displayed in the html code
- * Author - Hans Erritzøe
+ * @Author Hans Erritzøe
  */
 public class Car {
 

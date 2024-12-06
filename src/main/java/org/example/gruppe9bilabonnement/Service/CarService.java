@@ -16,9 +16,8 @@ public class CarService {
 
     /**
      * Method to call carRepository for a list of all cars in the DB
-     *
      * @return List<Car> - a list of all cars in the DB in <List> format
-     * Author - Hans Erritzøe
+     * @Author Hans Erritzøe
      */
     public List<Car> getAllCars() {
         return carRepository.getAllCars();
@@ -26,10 +25,9 @@ public class CarService {
 
     /**
      * Method to return a list of cars, where the query matches exactly the vehicle_id or all partial VIN matches
-     *
      * @param query - vehicle_id or VIN to be searched for
      * @return List<Car> - list of cars matching either exactly vehicle_id or all partial VIN matches in DB
-     * Author - Hans Erritzøe
+     * @Author Hans Erritzøe
      */
     public List<Car> getCarsByIdOrVIN(String query) {
         return carRepository.getCarsByIdOrVin(query);
@@ -37,10 +35,10 @@ public class CarService {
 
 
     /**
-     * TODO write comment
-     * Method to call CarRepository to add
-     *
-     * @param car
+     * Calls repository layer to add car to database, returns false if failed to add, true if car added to DB
+     * @param car - car to be added to DB
+     * @return boolean - true if car added successfully, false if failed to add
+     * @Author Hans Erritzøe
      */
     public boolean addCar(Car car) {
         return carRepository.addCar(car);

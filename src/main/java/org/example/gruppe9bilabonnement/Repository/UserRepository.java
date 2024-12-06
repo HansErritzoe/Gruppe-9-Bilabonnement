@@ -17,7 +17,7 @@ public class UserRepository {
      * Checks if username exists in mysql database
      * @param username - the username to be checked if exist (String)
      * @return true if user exists, false if not
-     * Author - Hans Erritzøe - Taken from a previous project i've made
+     * @Author Hans Erritzøe - Taken from a previous project i've made
      */
     public boolean doesUsernameExist(String username) {
         String sql = "SELECT COUNT(*) FROM user WHERE username = ?";
@@ -30,7 +30,7 @@ public class UserRepository {
      * @param username username of the user attempting to login
      * @param password password of the user attempting to login
      * @return true if username matches password in DB
-     * Author - Hans Erritzøe - taken partially from another project i've made
+     * @Author  Hans Erritzøe - taken partially from another project i've made
      */
     public boolean doesUsernameMatchPassword(String username, String password){
         String sql = "SELECT COUNT(*) FROM user WHERE username = ? AND password = ?";
@@ -42,7 +42,7 @@ public class UserRepository {
      * Returns a user object based on the given username, remember to check if user exists before running
      * @param username username of the user attempting to login
      * @return User object containing all the information of the user
-     * Author - Hans Erritzøe - taken from another project i've made
+     * @Author Hans Erritzøe - taken from another project i've made
      */
     public User retrieveUserByUsername(String username){
         String sql = "SELECT * FROM user WHERE username = ?";
