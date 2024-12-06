@@ -10,9 +10,117 @@
 }
 
 h1 {
-    color: green;
+    font-size: 2.5rem;
 }
 
 .content {
-    padding: 10%;
+    padding-left: 25%;
 }
+
+#add_car_button {
+    display: flex;
+    white-space: nowrap;
+    margin-bottom: 1vh;
+}
+
+#add_car_button button {
+    color: white;
+    font-size: 1.2rem;
+    padding: 4px 7px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--accent);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+#add_car_button button:hover {
+    background-color: #154965;
+}
+
+/* For some reason this was automatically applied to the css from the browser
+and had to be set to none to avoid underline on the button text */
+a:-webkit-any-link {
+    text-decoration: none;
+}
+
+/* Table styling starts here */
+/* Author: Hans Erritzøe */
+
+#table_search_div {
+    display: flex;
+    width: 65vw;
+    justify-content: left;
+    align-items: center;
+}
+
+
+#table_search_div form input {
+    font-size: 1.1rem;
+    padding: 4px 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+#table_search_div button {
+    font-family: Montserrat, sans-serif;
+    font-weight: lighter;
+    padding: 2px 5px;
+    margin-right: 5px;
+    font-size: 1.09rem;
+}
+
+table {
+    border-collapse: collapse; /* Collapses the borders into a single border for a cleaner view */
+    margin-top: 0.2vw;
+    text-align: left;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.1); /* Add's 2 shadows, 1 softer than the other */
+    border-radius: 5px;
+    overflow: auto; /* Adds scrollbar if extends beyond view */
+}
+
+thead {
+    background-color: var(--secondary);
+    color: white;
+}
+
+thead th {
+    padding: 13px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+tbody tr {
+    border-bottom: 1px solid rgba(204, 204, 204, 0.65);
+}
+
+tbody td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 13px;
+    padding-right: 5px;
+    white-space: nowrap; /* Makes the rows extends horizontally instead of wrapping to next line */
+}
+
+.status {
+    display: inline-block; /* defines the status labels as an inline block, making it not take up the entire space of the datacell */
+    padding: 3px 9px; /* Height then width padding */
+    font-weight: bold;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+}
+
+.status.available {
+    background-color: mediumseagreen;
+}
+
+.status.rented {
+    background-color: #f1c40f;
+    color: #000;
+}
+
+
+/* Table styling ends here */
