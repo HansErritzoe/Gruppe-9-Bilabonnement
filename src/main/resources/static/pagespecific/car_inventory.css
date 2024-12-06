@@ -8,3 +8,11 @@
 #car_added_success_message {
     color: green;
 }
+
+h1 {
+    color: green;
+}
+
+.content {
+    padding: 10%;
+}

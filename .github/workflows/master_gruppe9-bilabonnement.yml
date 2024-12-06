@@ -37,13 +37,21 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-      
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
-      
+
+      # Set environment variables using GitHub Secrets
+      - name: Set environment variables
+        env:
+          DATABASE_USER: ${{ vars.DATABASE_USER }}
+          DATABASE_URL: ${{ vars.DATABASE_URL }}
+          DATABASE_PASSWORD: ${{ vars.DATABASE_PASSWORD }}
+        run: echo "Environment variables set for deployment."
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
