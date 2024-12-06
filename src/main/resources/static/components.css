@@ -1,0 +1,24 @@
+/* CSS design for often used components such as buttons
+   Author: Hans og Jonas
+*/
+
+.table_edit_button {
+    padding: 4%;
+    border-radius: 8px;
+    background-color: var(--accent);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+.table_edit_button:hover {
+    background-color: #154965;
+}
+
+.clear_search_button {
+
+}
+
+.clear_search_button:hover {
+
+}

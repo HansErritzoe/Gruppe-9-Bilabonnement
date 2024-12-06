@@ -1,10 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+        Author: Hans Erritzøe
+        Created: 4/12-2024
+        Description: Login page for Bilabonnement A/S
+        Version: 1.0
+      -->
+    <script src="http://localhost:35729/livereload.js"></script>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Biler</title>
+    <link rel="stylesheet" href="/base.css">
+    <link rel="stylesheet" href="/components.css">
+    <link rel="stylesheet" href="/layout.css">
+    <link rel="stylesheet" href="/pagespecific/car_inventory.css">
 </head>
 <body>
+<main th:fragment="content">
+    <h1>Biler</h1>
+    <div>
+        <form action="/car_inventory_search" method="post">
+            <input type="text" name="query" placeholder="Søg på vogn/stelnummer"/>
+            <button type="submit">Søg</button>
+        </form>
+        <a th:if="${filterOn} == true" href="/car_inventory" class="clear_search_button">
+            <button>Ryd filter</button>
+        </a>
+        <a href="/car_inventory/add_car" id="add_car_button">
+            <button>Tilføj Bil</button>
+        </a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Vognnummer</th>
+            <th>Stelnummer</th>
+            <th>Mærke</th>
+            <th>Model</th>
+            <th>År</th>
+            <th>Status</th>
+            <th>Handlinger</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.id_vehicle}"></td>
+            <td th:text="${car.VIN}"></td>
+            <td th:text="${car.brand}"></td>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.year}"></td>
+            <td th:text="${car.available}"></td>
+            <td>
+                <a href="/car_inventory_edit_car" class="table_edit_button">Rediger</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 
 </body>
 </html>

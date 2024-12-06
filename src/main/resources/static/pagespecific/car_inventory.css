@@ -1,0 +1,10 @@
+/* CSS Code Specific for the car_inventory page(s) */
+/* Author: Hans Erritzøe */
+
+#car_added_failure_message {
+    color: red;
+}
+
+#car_added_success_message {
+    color: green;
+}
