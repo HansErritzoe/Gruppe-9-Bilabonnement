@@ -1,12 +1,18 @@
 /* CSS file for base variables
    Author: Hans og Jonas
  */
+html,body,header{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 :root {
     --primary: #0A3F53;
     --secondary: #0E5875;
     --accent: #1892C3;
     --background: #F1F1F2;
+    --text-color: white;
 }
 
 html {
@@ -15,5 +21,5 @@ html {
 }
 
 * {
-    box-sizing: border-box;
+    box-sizing: border-box
 }

@@ -1,19 +1,21 @@
 body{
     background-color: var(--background);
 }
-header{
+
+header {
+    position: fixed; /* Sticks it to the top */
+    top: 0;
+    left: 15vw; /* Leaves space for the navigation */
+    background-color: var(--primary);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--primary-color);
-    font-size: 2.4em;
+    font-size: 2em;
     color: var(--text-color);
     height: 10vh;
-    min-height: 38.4px; /*Pixel højde udregnet med https://pixelsconverter.com/em-to-px for at passe med em*/
-    width: 100%;
-    padding: 2%;
+    width: calc(100% - 15vw); /* Adjust width to exclude the navigation */
+    padding: 1%;
 }
-
 #logout-button{
     color: var(--text-color);
     background: none;
@@ -26,21 +28,42 @@ header{
     color: var(--text-color);
     background: none;
     border: none;
-    padding: 2vh 1vh;
-    font-size: 1.5em;
+    font-size: 2em;
     text-decoration: none;
+    width: 100%;
+    padding: 1vh;
 }
 
 .nav-button:hover{
     background-color: var(--accent);
     border-radius: 10px;
 }
-nav{
+
+nav {
+    position: fixed; /* Ensures it stays on the left */
+    top: 0; /* Aligns it to the top */
+    left: 0;
     display: flex;
     flex-direction: column;
-    background-color: var(--seconday-color);
-    height: 100vh;
-    width: 10vw;
-    min-width: 150px;
-    padding: 2%;
+    background-color: var(--secondary);
+    height: 100vh; /* Full height of the viewport */
+    width: 15vw; /* Percentage-based width */
+    min-width: 130px; /* Prevent it from becoming too narrow */
+    padding: 2vh;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 15vw 1fr; /* 15vw for navigation, rest for content */
+    margin-top: 10vh; /* Pushes below the header */
+    height: calc(100vh - 10vh); /* Adjusts height to exclude the header */
+}
+
+.content {
+    background-color: var(--background);
+    display: block; /* Block layout works fine if flex isn't needed */
+    margin-left: 15vw; /* Offset by the same width as the sidebar */
+    padding: 2%; /* Optional: Adds inner padding for spacing */
+    height: calc(100vh - 10vh); /* Adjust height to fit below the header */
+    text-align: left; /* Align text to the left */
 }

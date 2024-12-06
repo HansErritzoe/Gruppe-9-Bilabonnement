@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="~{layout :: common-head}"></head>
 <body>
-<main th:fragment="content">
-<div> </div>
-</main>
-
-
-<!-- /logout example to be used in header -->
-<form action="/logout" method="post">
-    <button type="submit">Log ud</button>
-</form>
-<!-- Ends here delete when unnecesary -->
+<div class="main-content">
+    <div th:replace="~{layout :: header}"></div>
+    <div th:replace="~{layout :: navbar}"></div>
+    <div class="content">
+        <h1>test</h1>
+    </div>
+</div>
 </body>
 </html>
