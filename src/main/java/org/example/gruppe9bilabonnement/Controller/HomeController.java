@@ -67,27 +67,23 @@ public class HomeController {
     /**
      * Method for handling creating a new car in the database submitted by the user
      * @param session HTTPSession object used for checking that user is logged in
-     * @param springModel normally just called model, but to avoid conflict with model for car parameter, named springModel
-     * @param @RequestParams - There is many @Requestparams here to handle passing all the data for creating the car object
+     * @param model Spring Model object used for adding error/success messages
+     * @param @ModelAttribute - Spring handles creating a car object with the field values from the form
      * @return returns the add_car html page with either success or errormessage
      * @Author Hans Erritzøe
      */
     @PostMapping("car_inventory/add_car")
-    public String addCar(HttpSession session, Model springModel, @RequestParam String VIN, @RequestParam String brand,
-                         @RequestParam String model, @RequestParam int year, @RequestParam String owner,
-                         @RequestParam int km_driven,@RequestParam double km_price, @RequestParam double monthly_price,
-                         @RequestParam boolean available){
+    public String addCar(HttpSession session, Model model, @ModelAttribute Car car){
         if(userIsLoggedIn(session)){
-            Car newCar = new Car(VIN,brand,model,year,owner,km_driven,km_price,monthly_price,available);
-            boolean success = carService.addCar(newCar);
+            boolean success = carService.addCar(car);
             if(success){
-                springModel.addAttribute("successMessage","Success! Bilen er nu tilføjet til databasen");
+                model.addAttribute("successMessage","Success! Bilen er nu tilføjet til databasen");
             } else {
-                springModel.addAttribute("errorMessage", "Fejl! Kunne ikke tilføje bilen til databasen, prøv igen eller kontakt admin for hjælp");
+                model.addAttribute("errorMessage", "Fejl! Kunne ikke tilføje bilen til databasen, prøv igen eller kontakt admin for hjælp");
             }
             return "car_inventory/add_car";
         } else {
-            springModel.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
             return "login/loginPage";
         }
     }
