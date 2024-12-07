@@ -67,3 +67,9 @@ nav {
     height: calc(100vh - 10vh); /* Adjust height to fit below the header */
     text-align: left; /* Align text to the left */
 }
+
+.content p {
+    font-style: italic;
+    color: #d9d9d9;
+    font-size: 0.80em;
+}
