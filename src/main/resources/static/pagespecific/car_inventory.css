@@ -20,7 +20,7 @@ h1 {
 #add_car_button {
     display: flex;
     white-space: nowrap;
-    margin-bottom: 1vh;
+    margin-bottom: 0.3vh;
 }
 
 #add_car_button button {

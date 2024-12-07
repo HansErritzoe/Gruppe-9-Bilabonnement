@@ -18,16 +18,16 @@
     <div class="content">
         <h1>Biler</h1>
         <div id="add_car_div">
-            <a href="/car_inventory/add_car" id="add_car_button">
+            <a th:href="@{/car_inventory/add_car}" id="add_car_button">
                 <button>Tilføj Bil</button>
             </a>
         </div>
         <div id="table_search_div">
-            <form action="/car_inventory_search" method="post">
+            <form th:action="@{/car_inventory_search}" method="post">
                 <input type="text" name="query" placeholder="Søg på vogn/stelnummer"/>
                 <button type="submit">Søg</button>
             </form>
-            <a th:if="${filterOn} == true" href="/car_inventory" class="clear_search_button">
+            <a th:if="${filterOn} == true" th:href="@{/car_inventory}" class="clear_search_button">
                 <button>Ryd filter</button>
             </a>
         </div>
@@ -55,8 +55,8 @@
                     <span th:if="${car.available}" class="status available">Ledig</span>
                     <span th:if="${!car.available}" class="status rented">Udlejet</span>
                 </td>
-                <td>
-                    <a href="/car_inventory_edit_car" class="table_edit_button">Rediger</a>
+                <td> <!-- Edit car functionality not implemented yet -->
+                    <a th:href="@{/car_inventory_edit_car}" class="table_edit_button">Rediger</a>
                 </td>
             </tr>
             </tbody>
