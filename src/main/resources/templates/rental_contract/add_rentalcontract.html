@@ -16,8 +16,6 @@
     <div class="content">
         <h1> Tilføj Lejeaftale </h1>
         <!-- Displays succes or error message depending on if car was added or not to DB-->
-        <div th:if="${successMessage}" id="rentalcontract_added_success_message" th:text="${successMessage}"></div>
-        <div th:if="${errorMessage}" id="rentalcontract_added_failure_message" th:text="${errorMessage}"></div>
         <form action="/rental_contract/add_rentalcontract" method="post">
             <button type="submit">Gem</button>
             <label>kundes ID</label>

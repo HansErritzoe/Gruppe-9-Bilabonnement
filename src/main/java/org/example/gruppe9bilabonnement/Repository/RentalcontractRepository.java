@@ -32,7 +32,7 @@ public class RentalcontractRepository {
      * Method for adding the car to the database, returns false if failure, true if not
      * @param rental_contract - rental to be added to the database
      * @return boolean - false if failed to add car to db, true if added successfully
-     * @Author Hans Erritzøe
+     * @Author Jonas Jakobsen
      */
     public boolean addRental_contract(Rental_contract rental_contract){
         String sql = """
