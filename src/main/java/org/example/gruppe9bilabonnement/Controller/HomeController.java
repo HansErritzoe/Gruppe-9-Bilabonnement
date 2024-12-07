@@ -6,11 +6,15 @@ import org.example.gruppe9bilabonnement.Service.RentalContractService;
 import org.example.gruppe9bilabonnement.Service.UserService;
 import org.example.gruppe9bilabonnement.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
 import java.util.*;
 
 @Controller
@@ -63,7 +67,11 @@ public class HomeController {
             return "login/loginPage";
         }
     }
-
+    @PostMapping("/rental_contract/add_rentalcontract")
+    public String addRentalcontract(@ModelAttribute Rental_contract rental_contract){
+        rentalContractService.addRental_contract(rental_contract);
+        return "rental_contract/rental_contract";
+    }
     /**
      * Method for returning the rental_contract html file address
      * @return string with rental_contract address if user is logged in, else it returns the user to the login page with error message
