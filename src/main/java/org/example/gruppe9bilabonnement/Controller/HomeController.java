@@ -102,7 +102,7 @@ public class HomeController {
     @GetMapping("/car_inventory/add_car")
     public String addCar(HttpSession session, Model model){
         if(userIsLoggedIn(session)){
-            return "/car_inventory/add_car";
+            return "car_inventory/add_car";
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
             return "login/loginPage";
