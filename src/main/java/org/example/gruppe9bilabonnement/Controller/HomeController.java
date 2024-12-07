@@ -85,7 +85,7 @@ public class HomeController {
             } else {
                 springModel.addAttribute("errorMessage", "Fejl! Kunne ikke tilføje bilen til databasen, prøv igen eller kontakt admin for hjælp");
             }
-            return "/car_inventory/add_car";
+            return "car_inventory/add_car";
         } else {
             springModel.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
             return "login/loginPage";
@@ -159,7 +159,7 @@ public class HomeController {
     @GetMapping("/rental_contract/add_rentalcontract")
     public String addRentalcontract(HttpSession session, Model model){
         if(userIsLoggedIn(session)){
-            return "/rental_contract/add_rentalcontract";
+            return "rental_contract/add_rentalcontract";
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
             return "login/loginPage";
