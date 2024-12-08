@@ -23,7 +23,7 @@
             </a>
         </div>
         <div id="table_search_div">
-            <form th:action="@{/car_inventory_search}" method="post">
+            <form th:action="@{/damage_report_search}" method="post">
                 <input type="text" name="query" placeholder="Søg på skaderapport id"/>
                 <button type="submit">Søg</button>
             </form>
@@ -35,8 +35,8 @@
             <table>
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Bil-Vognnummer</th>
+                    <th>Rapport ID</th>
+                    <th>Bil ID</th>
                     <th>Total Pris</th>
                     <th>Dato</th>
                     <th>Udfyldt af </th>

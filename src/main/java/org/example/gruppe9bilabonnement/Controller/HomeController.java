@@ -244,4 +244,18 @@ public class HomeController {
         }
     }
 
+    //TODO
+    @PostMapping("/damage_report_search")
+    public String damage_report_search(@RequestParam String query,HttpSession session, Model model){
+        if(userIsLoggedIn(session)){
+            List<Damage_report> damageReports = damageReportService.getDamageReportsById(query);
+            model.addAttribute("damageReports",damageReports);
+            model.addAttribute("filterOn", true); //enables displaying the "clear filter" button
+            return "damage_report/damage_report";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
 }

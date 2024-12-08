@@ -22,4 +22,11 @@ public class Damage_reportRepository {
         RowMapper<Damage_report> rowMapper = new BeanPropertyRowMapper<>(Damage_report.class);
         return template.query(sql,rowMapper);
     }
+
+    //TODO
+    public List<Damage_report> getDamageReportsByID(String query) {
+        String sql = "SELECT * FROM damage_report WHERE id_damage_report = ?";
+        RowMapper<Damage_report> rowMapper = new BeanPropertyRowMapper<>(Damage_report.class);
+        return template.query(sql,rowMapper, query);
+    }
 }

@@ -17,4 +17,9 @@ public class Damage_reportService {
     public List<Damage_report> getAllDamageReports() {
         return damageReportRepository.getAllDamageReports();
     }
+
+    //TODO
+    public List<Damage_report> getDamageReportsById(String query) {
+        return damageReportRepository.getDamageReportsByID(query);
+    }
 }
