@@ -1,10 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!--
+        Author: Hans Erritzøe
+        Created: 4/12-2024
+        Description: Login page for Bilabonnement A/S
+        Version: 1.0
+      -->
+    <script src="http://localhost:35729/livereload.js"></script>
+    <div th:replace="~{layout :: common-head}"></div>
+    <link rel="stylesheet" href="/pagespecific/damage_report.css">
 </head>
 <body>
-
+<div class="main-content">
+    <div th:replace="~{layout :: header}"></div>
+    <div th:replace="~{layout :: navbar}"></div>
+    <div class="content">
+        <h1>Skaderapporter</h1>
+        <div>
+            <a th:href="@{/car_inventory/add_car}" id="add_damage_report_button">
+                <button>Opret Skaderapport</button>
+            </a>
+        </div>
+        <div id="table_search_div">
+            <form th:action="@{/car_inventory_search}" method="post">
+                <input type="text" name="query" placeholder="Søg på skaderapport id"/>
+                <button type="submit">Søg</button>
+            </form>
+            <a th:if="${filterOn} == true" th:href="@{/damage_report}" class="clear_search_button">
+                <button>Ryd filter</button>
+            </a>
+        </div>
+        <div id="table_div">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Bil-Vognnummer</th>
+                    <th>Total Pris</th>
+                    <th>Dato</th>
+                    <th>Udfyldt af </th>
+                    <th>Betalings status </th>
+                    <th>Handlinger </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="damage_report : ${damageReports}">
+                    <td th:text="${damage_report.id_damage_report}"></td>
+                    <td th:text="${damage_report.car_id_vehicle}"></td>
+                    <td th:text="${#numbers.formatDecimal(damage_report.price_total, 2, 2)} + ' DKK '"></td>
+                    <td th:text="${damage_report.date}"></td>
+                    <td th:text="${damage_report.filled_by}"></td>
+                    <td>
+                        <span th:if="${damage_report.payment_status.equals('Paid')}" class="status paid">Betalt</span>
+                        <span th:if="${damage_report.payment_status.equals('Unpaid')}" class="status unpaid">Ubetalt</span>
+                    </td>
+                    <td> <!-- Edit car functionality not implemented yet -->
+                        <a th:href="@{/car_inventory_edit_car}" class="table_edit_button">Rediger</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

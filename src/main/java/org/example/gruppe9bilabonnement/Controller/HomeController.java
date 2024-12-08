@@ -1,23 +1,21 @@
 package org.example.gruppe9bilabonnement.Controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.example.gruppe9bilabonnement.Model.Damage_report;
 import org.example.gruppe9bilabonnement.Model.Rental_contract;
+import org.example.gruppe9bilabonnement.Service.Damage_reportService;
 import org.example.gruppe9bilabonnement.Service.RentalContractService;
 import org.example.gruppe9bilabonnement.Model.Car;
 import org.example.gruppe9bilabonnement.Service.CarService;
 import org.example.gruppe9bilabonnement.Service.UserService;
 import org.example.gruppe9bilabonnement.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.LocalDate;
-import java.util.*;
 
 import java.util.List;
 
@@ -30,9 +28,12 @@ public class HomeController {
     @Autowired
     CarService carService;
 
-
     @Autowired
     RentalContractService rentalContractService;
+
+    @Autowired
+    Damage_reportService damageReportService;
+
     /**
      * method for returning the login page for when user isn't logged in, returns dashboard if logged in
      * @return string with html page location/name (either login page if not logged in, or dashboard if logged in)
@@ -46,7 +47,6 @@ public class HomeController {
             return "login/loginPage";
         }
     }
-
 
     /**
      * Method for returning the dashboard html file address - this is the default landing page once a user has logged in
@@ -62,7 +62,6 @@ public class HomeController {
             return "login/loginPage";
         }
     }
-
 
     /**
      * Method for handling creating a new car in the database submitted by the user
@@ -143,7 +142,6 @@ public class HomeController {
             return "login/loginPage";
         }
     }
-
 
     /**
      * Method for displaying the add_rentalcontract html page where user can add rental contracts to the database
@@ -231,6 +229,19 @@ public class HomeController {
     public boolean userIsLoggedIn(HttpSession session){
         User user = (User) session.getAttribute("loggedInUser");
         return user != null;
+    }
+
+    //TODO
+    @GetMapping("/damage_report")
+    public String damage_report(HttpSession session, Model model){
+        if(userIsLoggedIn(session)){
+            List<Damage_report> damageReports = damageReportService.getAllDamageReports();
+            model.addAttribute("damageReports",damageReports);
+            return "damage_report/damage_report";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
     }
 
 }

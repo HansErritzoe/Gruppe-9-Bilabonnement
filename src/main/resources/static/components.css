@@ -2,6 +2,65 @@
    Author: Hans og Jonas
 */
 
+/* Table styling starts here */
+/* Author: Hans Erritzøe */
+
+#table_search_div {
+    display: flex;
+    width: 65vw;
+    justify-content: left;
+    align-items: center;
+}
+
+
+#table_search_div form input {
+    font-size: 1.1rem;
+    padding: 4px 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+#table_search_div button {
+    font-family: Montserrat, sans-serif;
+    font-weight: lighter;
+    padding: 2px 5px;
+    margin-right: 5px;
+    font-size: 1.09rem;
+}
+
+table {
+    border-collapse: collapse; /* Collapses the borders into a single border for a cleaner view */
+    margin-top: 0.2vw;
+    text-align: left;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.1); /* Add's 2 shadows, 1 softer than the other */
+    border-radius: 5px;
+    overflow: auto; /* Adds scrollbar if extends beyond view */
+}
+
+thead {
+    background-color: var(--secondary);
+    color: white;
+}
+
+thead th {
+    padding: 13px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+tbody tr {
+    border-bottom: 1px solid rgba(204, 204, 204, 0.65);
+}
+
+tbody td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 13px;
+    padding-right: 5px;
+    white-space: nowrap; /* Makes the rows extends horizontally instead of wrapping to next line */
+}
+
 .table_edit_button {
     padding: 4%;
     border-radius: 8px;
@@ -15,10 +74,4 @@
     background-color: #154965;
 }
 
-.clear_search_button {
-
-}
-
-.clear_search_button:hover {
-
-}
+/* Table styling ends here */

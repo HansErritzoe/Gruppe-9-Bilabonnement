@@ -1,29 +1,25 @@
-/* CSS Code Specific for the car_inventory page(s) */
+/* CSS Code Specific for the damage_report page(s) */
 /* Author: Hans Erritzøe */
 
-#car_added_failure_message {
-    color: red;
-}
-
-#car_added_success_message {
-    color: green;
+.content {
+    padding-left: 25%;
 }
 
 h1 {
     font-size: 2.5rem;
 }
 
-.content {
-    padding-left: 25%;
+thead th {
+    white-space: nowrap;
 }
 
-#add_car_button {
+#add_damage_report_button {
     display: flex;
     white-space: nowrap;
     margin-bottom: 0.3vh;
 }
 
-#add_car_button button {
+#add_damage_report_button button {
     color: white;
     font-size: 1.2rem;
     padding: 4px 7px;
@@ -35,14 +31,8 @@ h1 {
     font-weight: bold;
 }
 
-#add_car_button button:hover {
+#add_damage_report_button button:hover {
     background-color: #154965;
-}
-
-/* For some reason this was automatically applied to the css from the browser
-and had to be set to none to avoid underline on the button text */
-a:-webkit-any-link {
-    text-decoration: none;
 }
 
 .status {
@@ -54,14 +44,17 @@ a:-webkit-any-link {
     color: white;
 }
 
-.status.available {
+.status.paid {
     background-color: mediumseagreen;
 }
 
-.status.rented {
+.status.unpaid {
     background-color: #f1c40f;
     color: #000;
 }
 
-
-/* Table styling ends here */
+/* For some reason this was automatically applied to the css from the browser
+and had to be set to none to avoid underline on the button text */
+a:-webkit-any-link {
+    text-decoration: none;
+}
