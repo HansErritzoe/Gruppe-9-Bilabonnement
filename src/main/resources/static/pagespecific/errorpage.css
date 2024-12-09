@@ -1,0 +1,21 @@
+/* CSS Code Specific for the error page */
+/* Author: Hans Erritzøe */
+
+.content {
+    padding-left: 20%;
+}
+h1 {
+    font-size: 2.5rem;
+}
+
+h1, h3 {
+    width: 100%;
+    white-space: nowrap;
+}
+
+#error_details p {
+    color: black;
+    font-size: 1.3rem;
+    width: 100%;
+    white-space: nowrap;
+}

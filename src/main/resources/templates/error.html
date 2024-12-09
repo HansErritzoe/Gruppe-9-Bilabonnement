@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        Author: Hans Erritzøe
+        Created: 4/12-2024
+        Description: Errorpage for Bilabonnement A/S instead of white page error
+        Version: 1.0
+      -->
+    <script src="http://localhost:35729/livereload.js"></script>
+    <div th:replace="~{layout :: common-head}"></div>
+    <link rel="stylesheet" href="/pagespecific/errorpage.css">
+</head>
+<body>
+<div class="main-content">
+    <div th:replace="~{layout :: header}"></div>
+    <div th:replace="~{layout :: navbar}"></div>
+    <div class="content">
+        <h1>Der opstod en fejl</h1>
+        <h3>Det er muligt at denne side ikke er udviklet endnu</h3>
+        <h3>Hvis denne fejl er uforventet: kontakt venligst admin og tag et screenshot af siden her</h3>
+        <div id="error_details">
+        <!-- Spring boot automatically provides these error information attributes -->
+        <p th:text="'Status code: ' + ${status}"></p>
+        <p th:text="'Error message: ' + ${error}"></p>
+        <p th:text="'Timestamp: ' + ${timestamp}"></p>
+        <p th:text="'Path: ' + ${path}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
