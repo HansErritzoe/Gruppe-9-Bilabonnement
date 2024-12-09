@@ -22,4 +22,19 @@ public class Damage_reportService {
     public List<Damage_report> getDamageReportsById(String query) {
         return damageReportRepository.getDamageReportsByID(query);
     }
+
+    //TODO returns generated reports ID if succesfull, 0 if failure
+    public int addDamageReport(Damage_report damageReport) {
+        return damageReportRepository.addDamageReport(damageReport);
+    }
+
+    //TODO
+    public Damage_report getDamageReportByID(int id){
+        return damageReportRepository.getDamageReportByID(id);
+    }
+
+    //TODO
+    public boolean updateDamageReport(Damage_report damageReport) {
+        return damageReportRepository.updateDamageReport(damageReport);
+    }
 }

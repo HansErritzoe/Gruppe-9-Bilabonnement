@@ -43,4 +43,9 @@ public class CarService {
     public boolean addCar(Car car) {
         return carRepository.addCar(car);
     }
+
+    //TODO
+    public boolean doesCarExistWithId(int id) {
+        return carRepository.doesCarExistWithID(id);
+    }
 }

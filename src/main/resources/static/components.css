@@ -57,11 +57,12 @@ tbody td {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 13px;
-    padding-right: 5px;
+    padding-right: 13px;
     white-space: nowrap; /* Makes the rows extends horizontally instead of wrapping to next line */
 }
 
 .table_edit_button {
+    display: inline-block; /* defines the button as an inline block, making it not take up the entire space of the datacell */
     padding: 4%;
     border-radius: 8px;
     background-color: var(--accent);
@@ -73,5 +74,22 @@ tbody td {
 .table_edit_button:hover {
     background-color: #154965;
 }
+
+.table_delete_button {
+    display: inline-block; /* defines the button as an inline block, making it not take up the entire space of the datacell */
+    padding: 4%;
+    border-radius: 8px;
+    background-color: #ff6565;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-right: 4%;
+}
+.table_delete_button:hover {
+    background-color: #d55454;
+}
+
+
 
 /* Table styling ends here */

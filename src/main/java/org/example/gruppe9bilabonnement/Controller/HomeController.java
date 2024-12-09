@@ -1,21 +1,12 @@
 package org.example.gruppe9bilabonnement.Controller;
 
 import jakarta.servlet.http.HttpSession;
-import org.example.gruppe9bilabonnement.Model.Damage_report;
-import org.example.gruppe9bilabonnement.Model.Rental_contract;
-import org.example.gruppe9bilabonnement.Service.Damage_reportService;
-import org.example.gruppe9bilabonnement.Service.RentalContractService;
-import org.example.gruppe9bilabonnement.Model.Car;
-import org.example.gruppe9bilabonnement.Service.CarService;
-import org.example.gruppe9bilabonnement.Service.UserService;
-import org.example.gruppe9bilabonnement.Model.User;
+import org.example.gruppe9bilabonnement.Model.*;
+import org.example.gruppe9bilabonnement.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +24,9 @@ public class HomeController {
 
     @Autowired
     Damage_reportService damageReportService;
+
+    @Autowired
+    DamageService damageService;
 
     /**
      * method for returning the login page for when user isn't logged in, returns dashboard if logged in
@@ -257,5 +251,136 @@ public class HomeController {
             return "login/loginPage";
         }
     }
+
+    //TODO
+    @GetMapping("/damage_report/add_damage_report")
+    public String add_damage_report(HttpSession session, Model model){
+        if(userIsLoggedIn(session)){
+            return "damage_report/add_damage_report";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    //TODO
+    @PostMapping("/damage_report/add_damage_report")
+    public String addDamageReport(HttpSession session, Model model, @ModelAttribute Damage_report damage_report){
+        if(userIsLoggedIn(session)){
+            //check if car with id exists before creating damage report
+            if(carService.doesCarExistWithId(damage_report.getCar_id_vehicle())){
+                //get the generated ID for the report
+                int rapportID = damageReportService.addDamageReport(damage_report);
+                if(rapportID > 0){
+                    model.addAttribute("successMessage","Success! Skaderapporten er nu oprettet");
+                    return "redirect:/damage_report/edit_damage_report" + rapportID;
+                } else {
+                    model.addAttribute("errorMessage", "Fejl! Kunne ikke tilføje skaderapporten til databasen, prøv igen eller kontakt admin for hjælp");
+                    return "damage_report/add_damage_report";
+                }
+            } else {
+                model.addAttribute("errorMessage", "Kunne ikke oprette skaderapport. En bil med dette Vognnummer eksisterer ikke.");
+                return "damage_report/add_damage_report";
+            }
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    //TODO
+    @GetMapping("/damage_report/edit_damage_report{id_damage_report}")
+    public String editDamageReport(HttpSession session, Model model, @PathVariable("id_damage_report") int id){
+        if(userIsLoggedIn(session)){
+            model.addAttribute("damageReport",damageReportService.getDamageReportByID(id));
+            List<Damage> damageList = damageService.getAllDamagesForDamageReport(id);
+            model.addAttribute("damageList", damageList);
+            return "damage_report/edit_damage_report";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    //TODO
+    @PostMapping("/damage_report/edit_damage_report{id_damage_report}")
+    public String editDamageReport(HttpSession session, Model model, @ModelAttribute Damage_report damage_report){
+        if(userIsLoggedIn(session)){
+            model.addAttribute("damageReport", damage_report);
+            boolean success = damageReportService.updateDamageReport(damage_report);
+            if(success){
+                model.addAttribute("successMessage","Success! Ændringer til skaderapporten blev gemt");
+                return editDamageReport(session,model,damage_report.getId_damage_report());
+            } else {
+                model.addAttribute("errorMessage", "Kunne ikke gemme ændringerne til skaderapporten, kontakt admin for hjælp");
+                return editDamageReport(session,model,damage_report.getId_damage_report());
+            }
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    //TODO
+    @GetMapping("/damage_report/delete_damage_report")
+    public String deleteDamageReport(HttpSession session, Model model, @PathVariable("id_damage_report") int id){
+        if(userIsLoggedIn(session)){
+            model.addAttribute("damage_report_id",id);
+            return "damage/add_damage";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+
+    //TODO
+    @GetMapping("/damage/add_damage{id_damage_report}")
+    public String addDamage(HttpSession session, Model model, @PathVariable("id_damage_report") int id){
+        if(userIsLoggedIn(session)){
+            model.addAttribute("damage_report_id",id);
+            return "damage/add_damage";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    //TODO
+    @PostMapping("/damage/add_damage")
+    public String addDamage(HttpSession session, Model model, @ModelAttribute Damage damage){
+        if(userIsLoggedIn(session)){
+            boolean success = damageService.addDamage(damage);
+            if(success){
+                model.addAttribute("successMessage","Success! Skaden er tilføjet til skaderapporten");
+                return editDamageReport(session,model,damage.getId_damage_report());
+            } else {
+                model.addAttribute("errorMessage", "Fejl! Kunne ikke oprette skaden, kontakt admin for hjælp");
+                return editDamageReport(session,model,damage.getId_damage_report());
+            }
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    //TODO
+    @GetMapping("/delete_damage/{id_damage}/{id_damage_report}")
+    public String deleteDamage(HttpSession session, Model model, @PathVariable("id_damage") int id, @PathVariable("id_damage_report") int report_id){
+        if(userIsLoggedIn(session)){
+            boolean success = damageService.deleteDamageByID(id);
+            if(success){
+                model.addAttribute("successMessage","Success! Skaden er slettet");
+                return editDamageReport(session,model,report_id);
+            } else {
+                model.addAttribute("errorMessage", "Fejl! Kunne ikke slette skaden, kontakt admin for hjælp");
+                return editDamageReport(session,model,report_id);
+            }
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
 
 }

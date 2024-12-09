@@ -17,8 +17,10 @@
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
         <h1>Skaderapporter</h1>
+        <div th:if="${successMessage}" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
         <div>
-            <a th:href="@{/car_inventory/add_car}" id="add_damage_report_button">
+            <a th:href="@{/damage_report/add_damage_report}" id="add_damage_report_button">
                 <button>Opret Skaderapport</button>
             </a>
         </div>
@@ -55,8 +57,8 @@
                         <span th:if="${damage_report.payment_status.equals('Paid')}" class="status paid">Betalt</span>
                         <span th:if="${damage_report.payment_status.equals('Unpaid')}" class="status unpaid">Ubetalt</span>
                     </td>
-                    <td> <!-- Edit car functionality not implemented yet -->
-                        <a th:href="@{/car_inventory_edit_car}" class="table_edit_button">Rediger</a>
+                    <td>
+                        <a th:href="@{'/damage_report/edit_damage_report'+${damage_report.id_damage_report}}" class="table_edit_button">Rediger</a>
                     </td>
                 </tr>
                 </tbody>

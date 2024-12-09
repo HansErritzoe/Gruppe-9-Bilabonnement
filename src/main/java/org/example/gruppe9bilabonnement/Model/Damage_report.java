@@ -2,6 +2,7 @@ package org.example.gruppe9bilabonnement.Model;
 
 import java.time.LocalDate;
 
+//TODO
 public class Damage_report {
 
     private int id_damage_report;

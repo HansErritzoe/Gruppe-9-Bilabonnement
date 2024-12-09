@@ -66,4 +66,11 @@ public class CarRepository {
         }
 
     }
+
+    //TODO Checks if car exists with id
+    public boolean doesCarExistWithID(int id){
+        String sql = "SELECT COUNT(*) FROM car WHERE id_vehicle = ?";
+        int count = template.queryForObject(sql, Integer.class, id);
+        return count > 0;
+    }
 }

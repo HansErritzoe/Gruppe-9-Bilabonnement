@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        Author: Hans Erritzøe
+        Created: 4/12-2024
+        Description: Login page for Bilabonnement A/S
+        Version: 1.0
+      -->
+    <script src="http://localhost:35729/livereload.js"></script>
+    <div th:replace="~{layout :: common-head}"></div>
+</head>
+<body>
+<div class="main-content">
+    <div th:replace="~{layout :: header}"></div>
+    <div th:replace="~{layout :: navbar}"></div>
+    <div class="content">
+        <h1> Opret Skade for skaderapport: <span th:text="${damage_report_id}"> </span></h1>
+        <form th:action="@{/damage/add_damage}" method="post">
+            <button type="submit">Gem</button>
+            <label>Type</label>
+            <input type="text" name="type" placeholder="Eks: Ridset Rude" required>
+            <p> Indtast hvilken type skade det er, eks: "Bule" </p>
+            <label>Placering</label>
+            <input type="text" name="placement" placeholder="Eks: 'Venstre forrude" required>
+            <p>Indtast hvor på bilen skaden er, eks: 'Venstre Forhjul"</p>
+            <label>Pris</label>
+            <input type="number" name="price" placeholder="Eks: 2000" required>
+            <p> Indtast prisen for denne skade</p>
+            <input type="hidden" name="id_damage_report" th:value="${damage_report_id}">
+        </form>
+    </div>
+</div>
+</body>
+</html>
