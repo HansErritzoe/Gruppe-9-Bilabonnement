@@ -18,8 +18,8 @@
     <div class="content">
         <h1> Tilføj Bil </h1>
         <!-- Displays succes or error message depending on if car was added or not to DB-->
-        <div th:if="${successMessage}" id="car_added_success_message" th:text="${successMessage}"></div>
-        <div th:if="${errorMessage}" id="car_added_failure_message" th:text="${errorMessage}"></div>
+        <div th:if="${successMessage}" class="car_added_success_message" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" class="car_added_failure_message" th:text="${errorMessage}"></div>
         <form th:action="@{/car_inventory/add_car}" method="post">
             <button type="submit">Gem</button>
             <label>Stelnummer</label>
@@ -32,7 +32,7 @@
             <input type="text" name="model" placeholder="Eks: 200S">
             <p> Indtast bilens model </p>
             <label>År</label>
-            <input type="number" name="year" value="2024" min="1960" max="2040" placeholder="Eks: 2003">
+            <input type="number" name="year" value="2024" min="1960" max="2099" placeholder="Eks: 2003">
             <p> Indtast bilens produktions år </p>
             <label>Ejer</label>
             <input type="text" name="owner" placeholder="Eks: DS-Aarhus" required>

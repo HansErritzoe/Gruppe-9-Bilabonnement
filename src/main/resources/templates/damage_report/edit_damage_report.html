@@ -21,7 +21,7 @@
         <div th:if="${successMessage}" th:text="${successMessage}"></div>
         <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
         <form th:action="@{'/damage_report/edit_damage_report'+${damageReport.id_damage_report}}" method="post">
-            <button type="submit">Gem</button>
+            <button type="submit">Gem Ændringer</button>
             <label>Bilens Vognnummer</label>
             <input type="number" th:value="${damageReport.car_id_vehicle}" name="car_id_vehicle" placeholder="Eks: 23"
                    required>

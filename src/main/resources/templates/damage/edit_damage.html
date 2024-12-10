@@ -17,7 +17,7 @@
     <div class="content">
         <h1> Rediger skade: <span th:text="${damage.id_damage}"> </span></h1>
         <form th:action="@{/damage/edit_damage}" method="post">
-            <button type="submit">Gem</button>
+            <button type="submit">Gem Ændringer</button>
             <label>Type</label>
             <input type="text" name="type" th:value="${damage.type}" placeholder="Eks: Ridset Rude" required>
             <p> Indtast hvilken type skade det er, eks: "Bule" </p>

@@ -77,4 +77,28 @@ public class CarRepository {
         int count = template.queryForObject(sql, Integer.class, id);
         return count > 0;
     }
+
+    /**
+     * Method to return a car object from the DB based on an ID
+     * @param id - id (int) of the car to be retrieved from the database
+     * @return Car - Car object returned from the database based on the ID
+     * @Author - Hans Erritzøe
+     */
+    public Car getCarByID(int id) {
+        String sql = "SELECT * FROM car WHERE id_vehicle = ?";
+        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        return template.queryForObject(sql, rowMapper, id);
+    }
+
+    /**
+     * Method to update a car in the database based on the values of a passed Car object
+     * @param car - Car object with values and id of the car to be updated in the DB
+     * @return boolean - true if successful, false if failed to add
+     * @Author - Hans Erritzøe
+     */
+    public boolean updateCar(Car car) {
+        String sql = "UPDATE car SET VIN = ?, brand = ?, model = ?, year = ?, owner = ?, km_driven = ?, km_price = ?, monthly_price = ?, available = ? WHERE id_vehicle = ?";
+        int affectedRows = template.update(sql, car.getVIN(), car.getBrand(), car.getModel(), car.getYear(), car.getOwner(), car.getKm_driven(), car.getKm_price(), car.getMonthly_price(), car.isAvailable(), car.getId_vehicle());
+        return affectedRows > 0;
+    }
 }

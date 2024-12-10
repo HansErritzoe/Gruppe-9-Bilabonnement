@@ -52,7 +52,7 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             return "dashboard/dashboard";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -70,13 +70,13 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             boolean success = carService.addCar(car);
             if(success){
-                model.addAttribute("successMessage","Success! Bilen er nu tilføjet til databasen");
+                model.addAttribute("successMessage","Success! Bilen er nu tilføjet til databasen.");
             } else {
-                model.addAttribute("errorMessage", "Fejl! Kunne ikke tilføje bilen til databasen, prøv igen eller kontakt admin for hjælp");
+                model.addAttribute("errorMessage", "Fejl! Kunne ikke tilføje bilen til databasen, prøv igen eller kontakt admin for hjælp.");
             }
             return "car_inventory/add_car";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -93,7 +93,7 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             return "car_inventory/add_car";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -110,7 +110,7 @@ public class HomeController {
             model.addAttribute("cars",cars);
             return "car_inventory/car_inventory";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -132,7 +132,7 @@ public class HomeController {
             model.addAttribute("filterOn", true); //enables displaying the "clear filter" button
             return "car_inventory/car_inventory";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -149,7 +149,7 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             return "rental_contract/add_rentalcontract";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -171,7 +171,7 @@ public class HomeController {
             model.addAttribute("rental_contract",rentalContracts);
             return "rental_contract/rental_contract";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -191,11 +191,11 @@ public class HomeController {
                 session.setAttribute("loggedInUser", user);
                 return "dashboard/dashboard";
             } else { //if username and password don't match, display errormessage
-                model.addAttribute("loginErrorMessage", "Brugernavn og password matcher ikke - Kontakt admin hvis du har glemt dit kodeord eller brugernavn");
+                model.addAttribute("loginErrorMessage", "Brugernavn og password matcher ikke - Kontakt admin hvis du har glemt dit kodeord eller brugernavn.");
                 return "login/loginPage";
             }
         } else { //if username doesnt exists, display errormessage
-            model.addAttribute("loginErrorMessage", "Brugernavn eksisterer ikke - Kontakt admin hvis du har glemt dit brugernavn");
+            model.addAttribute("loginErrorMessage", "Brugernavn eksisterer ikke - Kontakt admin hvis du har glemt dit brugernavn.");
             return "login/loginPage";
         }
     }
@@ -239,7 +239,7 @@ public class HomeController {
             model.addAttribute("damageReports",damageReports);
             return "damage_report/damage_report";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -261,7 +261,7 @@ public class HomeController {
             model.addAttribute("filterOn", true); //enables displaying the "clear filter" button
             return "damage_report/damage_report";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -277,7 +277,7 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             return "damage_report/add_damage_report";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -301,10 +301,10 @@ public class HomeController {
                 //get the generated ID for the report
                 int rapportID = damageReportService.addDamageReport(damage_report);
                 if(rapportID > 0){
-                    model.addAttribute("successMessage","Success! Skaderapporten er nu oprettet");
+                    model.addAttribute("successMessage","Success! Skaderapporten er nu oprettet.");
                     return "redirect:/damage_report/edit_damage_report" + rapportID;
                 } else {
-                    model.addAttribute("errorMessage", "Fejl! Kunne ikke tilføje skaderapporten til databasen, prøv igen eller kontakt admin for hjælp");
+                    model.addAttribute("errorMessage", "Fejl! Kunne ikke tilføje skaderapporten til databasen, prøv igen eller kontakt admin for hjælp.");
                     return "damage_report/add_damage_report";
                 }
             } else {
@@ -312,7 +312,7 @@ public class HomeController {
                 return "damage_report/add_damage_report";
             }
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -333,7 +333,7 @@ public class HomeController {
             model.addAttribute("damageList", damageList);
             return "damage_report/edit_damage_report";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -352,14 +352,14 @@ public class HomeController {
             model.addAttribute("damageReport", damage_report);
             boolean success = damageReportService.updateDamageReport(damage_report);
             if(success){
-                model.addAttribute("successMessage","Success! Ændringer til skaderapporten blev gemt");
+                model.addAttribute("successMessage","Success! Ændringer til skaderapporten blev gemt.");
                 return editDamageReport(session,model,damage_report.getId_damage_report());
             } else {
-                model.addAttribute("errorMessage", "Kunne ikke gemme ændringerne til skaderapporten, kontakt admin for hjælp");
+                model.addAttribute("errorMessage", "Kunne ikke gemme ændringerne til skaderapporten, kontakt admin for hjælp.");
                 return editDamageReport(session,model,damage_report.getId_damage_report());
             }
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -377,7 +377,7 @@ public class HomeController {
             model.addAttribute("damage_report_id",id);
             return "damage/add_damage";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -395,14 +395,14 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             boolean success = damageService.addDamage(damage);
             if(success){
-                model.addAttribute("successMessage","Success! Skaden er tilføjet til skaderapporten");
+                model.addAttribute("successMessage","Success! Skaden er tilføjet til skaderapporten.");
                 return editDamageReport(session,model,damage.getId_damage_report());
             } else {
-                model.addAttribute("errorMessage", "Fejl! Kunne ikke oprette skaden, kontakt admin for hjælp");
+                model.addAttribute("errorMessage", "Fejl! Kunne ikke oprette skaden, kontakt admin for hjælp.");
                 return editDamageReport(session,model,damage.getId_damage_report());
             }
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -420,14 +420,14 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             boolean success = damageService.deleteDamageByID(id);
             if(success){
-                model.addAttribute("successMessage","Success! Skaden er slettet");
+                model.addAttribute("successMessage","Success! Skaden er slettet.");
                 return editDamageReport(session,model,report_id);
             } else {
-                model.addAttribute("errorMessage", "Fejl! Kunne ikke slette skaden, kontakt admin for hjælp");
+                model.addAttribute("errorMessage", "Fejl! Kunne ikke slette skaden, kontakt admin for hjælp.");
                 return editDamageReport(session,model,report_id);
             }
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -445,7 +445,7 @@ public class HomeController {
             model.addAttribute("damage",damage);
             return "damage/edit_damage";
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }
@@ -462,14 +462,56 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             boolean success = damageService.updateDamage(damage);
             if(success){
-                model.addAttribute("successMessage","Success! Ændringer til skaden er gemt");
+                model.addAttribute("successMessage","Success! Ændringer til skaden er gemt.");
                 return editDamageReport(session,model,damage.getId_damage_report());
             } else {
-                model.addAttribute("errorMessage", "Fejl! Ændringerne til skaden blev ikke gemt - kontakt admin for hjælp");
+                model.addAttribute("errorMessage", "Fejl! Ændringerne til skaden blev ikke gemt - kontakt admin for hjælp.");
                 return editDamageReport(session,model,damage.getId_damage_report());
             }
         } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for displaying the edit_car page, fills the input fields with the car's current data
+     * @param id - id of the car to be displayed, passed via URL
+     * @return String - string with the edit_car page
+     * @Author - Hans Erritzøe
+     */
+    @GetMapping("car_inventory/edit_car/{id_vehicle}")
+    public String editCar(HttpSession session, Model model, @PathVariable("id_vehicle") int id){
+        if(userIsLoggedIn(session)){
+            Car carToBeEdited = carService.getCarByID(id);
+            model.addAttribute("car", carToBeEdited);
+            return "car_inventory/edit_car";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method to handle when user attempts to save edits to a car in the database, adds success message and
+     * returns to car_inventory page
+     * @param car - Car object to be saved, generated from the user's input in the form on the html page
+     * @return String - adds error/success message and calls the car_inventory() method to return to car inventory
+     * @Author - Hans Erritzøe
+     */
+    @PostMapping("car_inventory/edit_car")
+    public String editCar(HttpSession session, Model model, @ModelAttribute Car car){
+        if(userIsLoggedIn(session)){
+            boolean success = carService.updateCar(car);
+            if(success){
+                model.addAttribute("successMessage","Success! Ændringer til bilen er gemt.");
+                return car_inventory(session,model);
+            } else {
+                model.addAttribute("errorMessage", "Fejl! Ændringerne til bilen blev ikke gemt - kontakt admin for hjælp.");
+                return car_inventory(session,model);
+            }
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
         }
     }

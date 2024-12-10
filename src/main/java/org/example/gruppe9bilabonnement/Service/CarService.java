@@ -53,4 +53,24 @@ public class CarService {
     public boolean doesCarExistWithId(int id) {
         return carRepository.doesCarExistWithID(id);
     }
+
+    /**
+     * Method to call repository layer to return a car based on an id
+     * @param id - id of the car to be returned (int)
+     * @return Car - car object returned with values retrieved from the database
+     * @Author - Hans Erritzøe
+     */
+    public Car getCarByID(int id) {
+        return carRepository.getCarByID(id);
+    }
+
+    /**
+     * Method to call repository layer to update a car based on a passed Car object
+     * @param car - Car Object with values to be inserted in the database
+     * @return boolean - true if successful, false if failed to add
+     * @Author - Hans Erritzøe
+     */
+    public boolean updateCar(Car car) {
+        return carRepository.updateCar(car);
+    }
 }
