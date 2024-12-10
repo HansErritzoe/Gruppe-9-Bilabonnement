@@ -2,7 +2,10 @@ package org.example.gruppe9bilabonnement.Model;
 
 import java.time.LocalDate;
 
-//TODO
+/**
+ * Damage_report class used to create Damage_report objects, which represents the Damage reports in the Database
+ * @Author Hans Erritzøe
+ */
 public class Damage_report {
 
     private int id_damage_report;

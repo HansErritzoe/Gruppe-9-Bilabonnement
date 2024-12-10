@@ -1,6 +1,10 @@
 package org.example.gruppe9bilabonnement.Model;
 
-//TODO
+/**
+ * Damage class, used to create Damage Objects which represents individual damages from a damage report
+ * in the database
+ * @Author Hans Erritzøe
+ */
 public class Damage {
 
     private int id_damage;

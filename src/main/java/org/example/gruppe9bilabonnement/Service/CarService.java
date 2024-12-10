@@ -35,7 +35,7 @@ public class CarService {
 
 
     /**
-     * Calls repository layer to add car to database, returns false if failed to add, true if car added to DB
+     * Method to call repository layer to add car to database, returns false if failed to add, true if car added to DB
      * @param car - car to be added to DB
      * @return boolean - true if car added successfully, false if failed to add
      * @Author Hans Erritzøe
@@ -44,7 +44,12 @@ public class CarService {
         return carRepository.addCar(car);
     }
 
-    //TODO
+    /**
+     * Method to call repository layer to check if a car with a specific id exists
+     * @param id - id of the car to be checked if exists
+     * @return boolean - returns true if car exists, false if not
+     * @Author Hans Erritzøe
+     */
     public boolean doesCarExistWithId(int id) {
         return carRepository.doesCarExistWithID(id);
     }

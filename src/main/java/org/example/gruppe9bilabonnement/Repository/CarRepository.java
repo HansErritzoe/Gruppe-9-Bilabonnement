@@ -20,7 +20,7 @@ public class CarRepository {
     /**
      * Method for returning a list of all cars from the DB
      * @return List<Car> - list of all cars in List format
-     * @Author Hans Erritzøe - TODO Spørg cay om de her metoder som er inspireret/næsten 100% taget fra hans undervisningsmateriale skal beskrives som "taget fra..." eller om de er så boilerplate at der ingen vej udenom at de ligner
+     * @Author Hans Erritzøe
      */
     public List<Car> getAllCars(){
         String sql = "SELECT * FROM car";
@@ -67,7 +67,11 @@ public class CarRepository {
 
     }
 
-    //TODO Checks if car exists with id
+    /**
+     * Method used to check if an car exists in the database with a specific id
+     * @param id - id (int) to be checked if exists in the database
+     * @return boolean - returns true if car exists, false if not
+     */
     public boolean doesCarExistWithID(int id){
         String sql = "SELECT COUNT(*) FROM car WHERE id_vehicle = ?";
         int count = template.queryForObject(sql, Integer.class, id);

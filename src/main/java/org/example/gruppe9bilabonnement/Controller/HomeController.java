@@ -179,7 +179,7 @@ public class HomeController {
     /**
      * Method for handling when a user attempts to login
      * Checks if user exists, if so, checks if username and password match, if so, add User object to HttpSession
-     * and proceed to dashboard page, if either checks fail, displays error message
+     * and proceed to dashboard page, if either checks fail, displays error message and return to loginPage
      * @return String with dashboard page if successfull, login page with error message if fail
      * @Author Hans Erritzøe (partially taken from previous project i've made)
      */
@@ -225,7 +225,13 @@ public class HomeController {
         return user != null;
     }
 
-    //TODO
+    /**
+     * Method to return the damage_report html file, which displays a list of all damage reports
+     * @param session - HTTPSession object used for checking that user is logged in
+     * @param model - Model object used for displaying error message if user attempts to access without loggin in
+     * @return String - returns string with damage_report page or loginpage if user isn't logged in
+     * @Author Hans Erritzøe
+     */
     @GetMapping("/damage_report")
     public String damage_report(HttpSession session, Model model){
         if(userIsLoggedIn(session)){
@@ -238,7 +244,15 @@ public class HomeController {
         }
     }
 
-    //TODO
+    /**
+     * Method for handling when user attempts to search for specific damage reports
+     * Adds the new list of damage reports to the model, based on the query and sets FilterOn to true,
+     * in order to display the "clear filter" button
+     * @param query - the query that the user has inputted in the search bar
+     * @return String - returns String with damage_report html file address
+     * or loginPage address if user isn't logged in
+     * @Author Hans Erritzøe
+     */
     @PostMapping("/damage_report_search")
     public String damage_report_search(@RequestParam String query,HttpSession session, Model model){
         if(userIsLoggedIn(session)){
@@ -252,7 +266,12 @@ public class HomeController {
         }
     }
 
-    //TODO
+    /**
+     * Method for displaying the add_damage_report page
+     * @return String - returns a string with the add_damage_report html file address
+     * or loginpage address if user isn't logged in
+     * @Author Hans Erritzøe
+     */
     @GetMapping("/damage_report/add_damage_report")
     public String add_damage_report(HttpSession session, Model model){
         if(userIsLoggedIn(session)){
@@ -263,7 +282,17 @@ public class HomeController {
         }
     }
 
-    //TODO
+    /**
+     * Method for handling when user attempts to create a new Damage Report.
+     * Checks if the car_id for the chosen car exists before proceeding to add.
+     * If successfull, redirects to edit_damage_report page where the user can add damages to the report.
+     * @param damage_report - the Damage_report object containing the values to be inserted in the DB
+     * @return String - if successfull, returns a string that redirects to the edit_damage_report page
+     * with the generated ID of the new Damage_report so the user can add the damages to the Damage report,
+     * if either car doesnt exist with that id, or the insert failed: returns a string to the add_damage_report with
+     * a corresponding error message added to the model
+     * @Author Hans Erritzøe
+     */
     @PostMapping("/damage_report/add_damage_report")
     public String addDamageReport(HttpSession session, Model model, @ModelAttribute Damage_report damage_report){
         if(userIsLoggedIn(session)){
@@ -288,7 +317,14 @@ public class HomeController {
         }
     }
 
-    //TODO
+    /**
+     * Method for displaying the edit_damage_report page where the user can edit the damage report details,
+     * along with adding, editing or removing the individual damages belonging to that damage report
+     * @param id - the id of the damage_report to be edited
+     * @return String - returns string containing the address of the edit_damage_report html file,
+     * or login page address, if user isn't logged in
+     * @Author Hans Erritzøe
+     */
     @GetMapping("/damage_report/edit_damage_report{id_damage_report}")
     public String editDamageReport(HttpSession session, Model model, @PathVariable("id_damage_report") int id){
         if(userIsLoggedIn(session)){
@@ -302,7 +338,14 @@ public class HomeController {
         }
     }
 
-    //TODO
+    /**
+     * Method for handling when user attempts to save the edits to a Damage report,
+     * attempts to update the database with the edit and then display either success or failure message
+     * @param damage_report - the Damage_report object to be updated in the database
+     * @return String - calls the editDamageReport method to return the String of the edit_damage_report page,
+     * with the correct damage_report to be displayed based on the damage report id
+     * @Author Hans Erritzøe
+     */
     @PostMapping("/damage_report/edit_damage_report{id_damage_report}")
     public String editDamageReport(HttpSession session, Model model, @ModelAttribute Damage_report damage_report){
         if(userIsLoggedIn(session)){
@@ -321,20 +364,13 @@ public class HomeController {
         }
     }
 
-    //TODO
-    @GetMapping("/damage_report/delete_damage_report")
-    public String deleteDamageReport(HttpSession session, Model model, @PathVariable("id_damage_report") int id){
-        if(userIsLoggedIn(session)){
-            model.addAttribute("damage_report_id",id);
-            return "damage/add_damage";
-        } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
-            return "login/loginPage";
-        }
-    }
-
-
-    //TODO
+    /**
+     * Method for displaying the add_damage page with a reference to the damage report to which that damage is being added
+     * @param id - id of the damage report to which the damage is being added
+     * @return String - returns a string of the address to the html file for the add damage page,
+     * or loginpage if user isn't logged in
+     * @Author Hans Erritzøe
+     */
     @GetMapping("/damage/add_damage{id_damage_report}")
     public String addDamage(HttpSession session, Model model, @PathVariable("id_damage_report") int id){
         if(userIsLoggedIn(session)){
@@ -346,7 +382,14 @@ public class HomeController {
         }
     }
 
-    //TODO
+    /**
+     * Method for handling when user attempts to add a damage to a damage report and the DB, redirects to the edit page
+     * of the damage report with success or failure message
+     * @param damage - the Damage object to be added to the damage report and the DB
+     * @return String - calls the editDamageReport() method to return the edit_damage_report address with the relevant
+     * damage_report being displayed, or the userPage if user isn't logged in
+     * @Author Hans Erritzøe
+     */
     @PostMapping("/damage/add_damage")
     public String addDamage(HttpSession session, Model model, @ModelAttribute Damage damage){
         if(userIsLoggedIn(session)){
@@ -364,7 +407,13 @@ public class HomeController {
         }
     }
 
-    //TODO
+    /**
+     * Method to handle when user attempts to remove a damage from a damage report
+     * @param id - id of the damage to be removed
+     * @param report_id - id of the damage report to which the damage belong
+     * @return String - calls the editDamageReport() method to return the edit_damage_report address with the relevant
+     * damage_report being displayed, or the userPage if user isn't logged in
+     */
     @GetMapping("/delete_damage/{id_damage}/{id_damage_report}")
     public String deleteDamage(HttpSession session, Model model, @PathVariable("id_damage") int id, @PathVariable("id_damage_report") int report_id){
         if(userIsLoggedIn(session)){
@@ -381,6 +430,5 @@ public class HomeController {
             return "login/loginPage";
         }
     }
-
 
 }
