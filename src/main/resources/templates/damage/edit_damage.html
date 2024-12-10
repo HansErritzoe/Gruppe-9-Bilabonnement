@@ -4,7 +4,7 @@
     <!--
         Author: Hans Erritzøe
         Created: 4/12-2024
-        Description: Page for adding a damage to a damage report
+        Description: Page for editing a damage
         Version: 1.0
       -->
     <script src="http://localhost:35729/livereload.js"></script>
@@ -15,19 +15,20 @@
     <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
-        <h1> Opret Skade til Skaderapport <span th:text="${damage_report_id}"> </span></h1>
-        <form th:action="@{/damage/add_damage}" method="post">
+        <h1> Rediger skade: <span th:text="${damage.id_damage}"> </span></h1>
+        <form th:action="@{/damage/edit_damage}" method="post">
             <button type="submit">Gem</button>
             <label>Type</label>
-            <input type="text" name="type" placeholder="Eks: Ridset Rude" required>
+            <input type="text" name="type" th:value="${damage.type}" placeholder="Eks: Ridset Rude" required>
             <p> Indtast hvilken type skade det er, eks: "Bule" </p>
             <label>Placering</label>
-            <input type="text" name="placement" placeholder="Eks: 'Venstre forrude" required>
+            <input type="text" name="placement" th:value="${damage.placement}" placeholder="Eks: 'Venstre forrude" required>
             <p>Indtast hvor på bilen skaden er, eks: 'Venstre Forhjul"</p>
             <label>Pris</label>
-            <input type="number" name="price" placeholder="Eks: 2000" required>
+            <input type="number" name="price" th:value="${damage.price}" step="0.01" placeholder="Eks: 2000" required>
             <p> Indtast prisen for denne skade</p>
-            <input type="hidden" name="id_damage_report" th:value="${damage_report_id}">
+            <input type="hidden" name="id_damage_report" th:value="${damage.id_damage_report}">
+            <input type="hidden" name="id_damage" th:value="${damage.id_damage}">
         </form>
     </div>
 </div>

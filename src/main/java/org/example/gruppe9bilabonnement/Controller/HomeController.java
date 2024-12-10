@@ -413,6 +413,7 @@ public class HomeController {
      * @param report_id - id of the damage report to which the damage belong
      * @return String - calls the editDamageReport() method to return the edit_damage_report address with the relevant
      * damage_report being displayed, or the userPage if user isn't logged in
+     * @Author Hans Erritzøe
      */
     @GetMapping("/delete_damage/{id_damage}/{id_damage_report}")
     public String deleteDamage(HttpSession session, Model model, @PathVariable("id_damage") int id, @PathVariable("id_damage_report") int report_id){
@@ -424,6 +425,48 @@ public class HomeController {
             } else {
                 model.addAttribute("errorMessage", "Fejl! Kunne ikke slette skaden, kontakt admin for hjælp");
                 return editDamageReport(session,model,report_id);
+            }
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for displaying the edit_damage page where user can edit the details of a single damage
+     * @param id - the id of the damage to be editted
+     * @return String - returns a string with the address of the edit_damage html file address
+     * @Author Hans Erritzøe
+     */
+    @GetMapping("/damage/edit_damage/{id_damage}")
+    public String editDamage(HttpSession session, Model model, @PathVariable("id_damage") int id){
+        if(userIsLoggedIn(session)){
+            Damage damage = damageService.getDamageByID(id);
+            model.addAttribute("damage",damage);
+            return "damage/edit_damage";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method to handle when a user is attempting to edit a damage
+     * @param damage - new Damage object generated from the form user input
+     * @return String - calls the editDamageReport() method to return the edit_damage_report address with the relevant
+     * damage_report being displayed, or the userPage if user isn't logged in
+     * @Author - Hans Erritzøe
+     */
+    @PostMapping("/damage/edit_damage")
+    public String editDamage(HttpSession session, Model model, @ModelAttribute Damage damage){
+        if(userIsLoggedIn(session)){
+            boolean success = damageService.updateDamage(damage);
+            if(success){
+                model.addAttribute("successMessage","Success! Ændringer til skaden er gemt");
+                return editDamageReport(session,model,damage.getId_damage_report());
+            } else {
+                model.addAttribute("errorMessage", "Fejl! Ændringerne til skaden blev ikke gemt - kontakt admin for hjælp");
+                return editDamageReport(session,model,damage.getId_damage_report());
             }
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side");

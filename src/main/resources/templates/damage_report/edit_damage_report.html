@@ -69,7 +69,7 @@
                         <td th:text="${damage.placement}"></td>
                         <td th:text="${#numbers.formatDecimal(damage.price, 2, 2)} + ' DKK '"></td>
                         <td> <!-- Edit functionality not implemented yet -->
-                            <a th:href="@{'/damage_report/edit_damage_report'+${damage.id_damage}}" class="table_edit_button">Rediger</a>
+                            <a th:href="@{'/damage/edit_damage/'+${damage.id_damage}}" class="table_edit_button">Rediger</a>
                             <a th:href="@{'/delete_damage/'+${damage.id_damage}+'/'+${damage.id_damage_report}}" class="table_delete_button">Slet</a>
                         </td>
                     </tr>

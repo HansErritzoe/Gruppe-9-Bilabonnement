@@ -43,4 +43,24 @@ public class DamageService {
     public boolean deleteDamageByID(int id) {
         return damageRepository.deleteDamageByID(id);
     }
+
+    /**
+     * Method to call repository layer to fetch a Damage object from the DB based on ID
+     * @param id - id of the damage row to be fetched
+     * @return Damage - returns a Damage object containing the values of the relevant row in the DB
+     * @Author Hans Erritzøe
+     */
+    public Damage getDamageByID(int id) {
+        return damageRepository.getDamageByID(id);
+    }
+
+    /**
+     * Calls repository layer to update a Damage row with new values based on a Damage object
+     * @param damage - the Damage object containing the values to be updated in the DB
+     * @return boolean - true if successfully updated changes to DB, false if not
+     * @Author - Hans Erritzøe
+     */
+    public boolean updateDamage(Damage damage) {
+        return damageRepository.updateDamage(damage);
+    }
 }
