@@ -14,54 +14,95 @@
     <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
-        <h1> Tilføj Lejeaftale </h1>
-        <!-- Displays succes or error message depending on if car was added or not to DB-->
+        <h1>Tilføj Lejeaftale</h1>
+        <!-- Displays success or error message depending on if car was added or not to DB-->
         <form action="/rental_contract/add_rentalcontract" method="post">
             <button type="submit">Gem</button>
-            <label>kundes ID</label>
-            <input type="number" name="customer_id" placeholder="Eks: 1" required>
-            <p> Indtast kundes ID </p>
-            <label>Bilens ID</label>
-            <input type="number" name="car_vehicle_id" placeholder="Eks: 1" required>
-            <p> Indtast bilens ID </p>
-            <label>Start Dato</label>
-            <input type="date" name="start_date" placeholder="Eks: 2024-01-01">
-            <p> Indtast lejeaftalens start dato </p>
-            <label>Slut Dato</label>
-            <input type="date" name="end_date" placeholder="Eks: 2024-02-01">
-            <p> Indtast lejeaftalens slut dato </p>
-            <label>Status</label>
-            <select name="status" required>
-                <option value="Started">Startet</option>
-                <option value="Finished">Sluttet</option>
-                <option value="Pending Review">Afventer Review</option>
-            </select>
-            <p> Vælg status for lejeaftalen </p>
-            <label>IRK code</label>
-            <input type="text" name="irk_code" placeholder="Eks: DK-1234-5678-ABCD">
-            <p> Indtast IRK koden som tilhøre lejeaftalen </p>
-            <label>leasing kode</label>
-            <input type="text" name="leasing_code" placeholder="Eks: DK-2024-AB1234">
-            <p> Indtast leasing koden som tilhøre lejeaftalen </p>
-            <label>KM per Måned</label>
-            <input type="number" name="km_pr_month" placeholder="Eks: 1500">
-            <p> Indtast kundens tilvalgte kilometer om måneden</p>
-            <label>Pris per måned</label>
-            <input type="number" name="price_per_month" min="1000" max="25000" placeholder="Eks: 1000">
-            <p> Indtast bilens basis månedspris (DKK)</p>
-            <label>Betalt</label>
-            <select name="payment_status">
-                <option value="Paid">Betalt</option>
-                <option value="Unpaid">Ikke betalt</option>
-            </select>
-            <p> Vælg om lejeaftalen er betalt </p>
-            <label>Afhentnings lokation</label>
-            <input type="text" name="pickup_location" placeholder="Vibeholmsvej 31, 2605 Brøndby">
-             <p> Indtast hvor bilen skal afhentes fra</p>
-            <label>Afleverings lokation</label>
-            <input type="text" name="return_location" placeholder="Vibeholmsvej 31, 2605 Brøndby">
-            <p> Indtast hvor bilen skal afleveres til</p>
+
+            <!-- All fields in a flex container -->
+            <div class="form-container">
+                <div class="form-row">
+                    <label>kundes ID</label>
+                    <input type="number" name="customer_id" placeholder="Eks: 1" required>
+                    <p> Indtast kundes ID </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Bilens ID</label>
+                    <input type="number" name="car_vehicle_id" placeholder="Eks: 1" required>
+                    <p> Indtast bilens ID </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Start Dato</label>
+                    <input type="date" name="start_date" placeholder="Eks: 2024-01-01">
+                    <p> Indtast lejeaftalens start dato </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Slut Dato</label>
+                    <input type="date" name="end_date" placeholder="Eks: 2024-02-01">
+                    <p> Indtast lejeaftalens slut dato </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Status</label>
+                    <select name="status" required>
+                        <option value="Started">Startet</option>
+                        <option value="Finished">Sluttet</option>
+                        <option value="Pending Review">Afventer Review</option>
+                    </select>
+                    <p> Vælg status for lejeaftalen </p>
+                </div>
+
+                <div class="form-row">
+                    <label>IRK code</label>
+                    <input type="text" name="irk_code" placeholder="Eks: DK-1234-5678-ABCD">
+                    <p> Indtast IRK koden som tilhøre lejeaftalen </p>
+                </div>
+
+                <div class="form-row">
+                    <label>leasing kode</label>
+                    <input type="text" name="leasing_code" placeholder="Eks: DK-2024-AB1234">
+                    <p> Indtast leasing koden som tilhøre lejeaftalen </p>
+                </div>
+
+                <div class="form-row">
+                    <label>KM per Måned</label>
+                    <input type="number" name="km_pr_month" placeholder="Eks: 1500">
+                    <p> Indtast kundens tilvalgte kilometer om måneden</p>
+                </div>
+
+                <div class="form-row">
+                    <label>Pris per måned</label>
+                    <input type="number" name="price_per_month" min="1000" max="25000" placeholder="Eks: 1000">
+                    <p> Indtast bilens basis månedspris (DKK)</p>
+                </div>
+
+                <div class="form-row">
+                    <label>Betalt</label>
+                    <select name="payment_status">
+                        <option value="Paid">Betalt</option>
+                        <option value="Unpaid">Ikke betalt</option>
+                    </select>
+                    <p> Vælg om lejeaftalen er betalt </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Afhentnings lokation</label>
+                    <input type="text" name="pickup_location" placeholder="Vibeholmsvej 31, 2605 Brøndby">
+                    <p> Indtast hvor bilen skal afhentes fra</p>
+                </div>
+
+                <div class="form-row">
+                    <label>Afleverings lokation</label>
+                    <input type="text" name="return_location" placeholder="Vibeholmsvej 31, 2605 Brøndby">
+                    <p> Indtast hvor bilen skal afleveres til</p>
+                </div>
+            </div>
         </form>
+
+
     </div>
 </div>
 </body>

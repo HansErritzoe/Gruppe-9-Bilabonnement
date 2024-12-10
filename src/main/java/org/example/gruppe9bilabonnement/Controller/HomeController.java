@@ -178,7 +178,6 @@ public class HomeController {
     @GetMapping("/rental_contract")
     public String rental_contract(HttpSession session, Model model){
         if(userIsLoggedIn(session)){
-
             List<Rental_contract> rentalContracts = rentalContractService.getAllRentalcontracts();
             model.addAttribute("rental_contract",rentalContracts);
             return "rental_contract/rental_contract";

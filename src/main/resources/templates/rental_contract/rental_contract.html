@@ -11,10 +11,57 @@
 </head>
 <body>
 <div class="main-content">
-    <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
+    <div th:replace="~{layout :: header}"></div>
     <div class="content">
-        <a href="rental_contract/add_rentalcontract">her</a>
+        <h1>Lejeaftaler</h1>
+        <div>
+            <a href="rental_contract/add_rentalcontract">Tilføj Lejeaftale</a>
+        </div>
+        <div id="table_div">
+            <table>
+                <thead>
+                <tr>
+                    <th>Lejeaftale</th>
+                    <th>Kundenummer</th>
+                    <th>Bilnummer</th>
+                    <th>Start dato</th>
+                    <th>Slut dato</th>
+                    <th>Status</th>
+                    <th>IRK kode</th>
+                    <th>Leasing kode</th>
+                    <th>Total pris</th>
+                    <th>Betalings status</th>
+                    <th>Afhentnings lokation</th>
+                    <th>Retur lokation</th>
+                    <th>Skadesrapport</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="rental_contract : ${rental_contract}">
+                    <td th:text="${rental_contract.getId_rental_contract()}"></td>
+                    <td th:text="${rental_contract.getCustomer_id()}"></td>
+                    <td th:text="${rental_contract.getCar_vehicle_id()}"></td>
+                    <td th:text="${rental_contract.getStart_date()}"></td>
+                    <td th:text="${rental_contract.getEnd_date()}"></td>
+                    <td th:switch="${rental_contract.status}">
+                        <span th:case="'Started'" class="status started">Startede</span>
+                        <span th:case="'Finished'" class="status finished">Sluttet</span>
+                        <span th:case="'Pending Review'" class="status pending-review">Afventer behandling</span>
+                    </td>
+                    <td th:text="${rental_contract.getIrk_code()}"></td>
+                    <td th:text="${rental_contract.getLeasing_code()}"></td>
+                    <td th:text="${rental_contract.getPrice_per_month()}"></td>
+                    <td th:switch="${rental_contract.payment_status}">
+                        <span th:case="'Paid'" class="status started">Betalt</span>
+                        <span th:case="'Unpaid'" class="status finished">Ikke Betalt</span>
+                    </td>
+                    <td th:text="${rental_contract.getPickup_location()}"></td>
+                    <td th:text="${rental_contract.getReturn_location()}"></td>
+                    <td th:text="${rental_contract.getId_damage_report()}"></td>
+                </tr>
+                </tbody>
+            </table>
     </div>
 </div>
 </body>
