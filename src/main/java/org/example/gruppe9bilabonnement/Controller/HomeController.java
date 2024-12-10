@@ -74,7 +74,7 @@ public class HomeController {
             } else {
                 model.addAttribute("errorMessage", "Fejl! Kunne ikke tilføje bilen til databasen, prøv igen eller kontakt admin for hjælp.");
             }
-            return "car_inventory/add_car";
+            return car_inventory(session,model);
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
@@ -131,6 +131,48 @@ public class HomeController {
             model.addAttribute("cars",cars);
             model.addAttribute("filterOn", true); //enables displaying the "clear filter" button
             return "car_inventory/car_inventory";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for displaying the edit_car page, fills the input fields with the car's current data
+     * @param id - id of the car to be displayed, passed via URL
+     * @return String - string with the edit_car page
+     * @Author - Hans Erritzøe
+     */
+    @GetMapping("car_inventory/edit_car/{id_vehicle}")
+    public String editCar(HttpSession session, Model model, @PathVariable("id_vehicle") int id){
+        if(userIsLoggedIn(session)){
+            Car carToBeEdited = carService.getCarByID(id);
+            model.addAttribute("car", carToBeEdited);
+            return "car_inventory/edit_car";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method to handle when user attempts to save edits to a car in the database, adds success message and
+     * returns to car_inventory page
+     * @param car - Car object to be saved, generated from the user's input in the form on the html page
+     * @return String - adds error/success message and calls the car_inventory() method to return to car inventory
+     * @Author - Hans Erritzøe
+     */
+    @PostMapping("car_inventory/edit_car")
+    public String editCar(HttpSession session, Model model, @ModelAttribute Car car){
+        if(userIsLoggedIn(session)){
+            boolean success = carService.updateCar(car);
+            if(success){
+                model.addAttribute("successMessage","Success! Ændringer til bilen er gemt.");
+                return car_inventory(session,model);
+            } else {
+                model.addAttribute("errorMessage", "Fejl! Ændringerne til bilen blev ikke gemt - kontakt admin for hjælp.");
+                return car_inventory(session,model);
+            }
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
@@ -467,48 +509,6 @@ public class HomeController {
             } else {
                 model.addAttribute("errorMessage", "Fejl! Ændringerne til skaden blev ikke gemt - kontakt admin for hjælp.");
                 return editDamageReport(session,model,damage.getId_damage_report());
-            }
-        } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
-            return "login/loginPage";
-        }
-    }
-
-    /**
-     * Method for displaying the edit_car page, fills the input fields with the car's current data
-     * @param id - id of the car to be displayed, passed via URL
-     * @return String - string with the edit_car page
-     * @Author - Hans Erritzøe
-     */
-    @GetMapping("car_inventory/edit_car/{id_vehicle}")
-    public String editCar(HttpSession session, Model model, @PathVariable("id_vehicle") int id){
-        if(userIsLoggedIn(session)){
-            Car carToBeEdited = carService.getCarByID(id);
-            model.addAttribute("car", carToBeEdited);
-            return "car_inventory/edit_car";
-        } else {
-            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
-            return "login/loginPage";
-        }
-    }
-
-    /**
-     * Method to handle when user attempts to save edits to a car in the database, adds success message and
-     * returns to car_inventory page
-     * @param car - Car object to be saved, generated from the user's input in the form on the html page
-     * @return String - adds error/success message and calls the car_inventory() method to return to car inventory
-     * @Author - Hans Erritzøe
-     */
-    @PostMapping("car_inventory/edit_car")
-    public String editCar(HttpSession session, Model model, @ModelAttribute Car car){
-        if(userIsLoggedIn(session)){
-            boolean success = carService.updateCar(car);
-            if(success){
-                model.addAttribute("successMessage","Success! Ændringer til bilen er gemt.");
-                return car_inventory(session,model);
-            } else {
-                model.addAttribute("errorMessage", "Fejl! Ændringerne til bilen blev ikke gemt - kontakt admin for hjælp.");
-                return car_inventory(session,model);
             }
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
