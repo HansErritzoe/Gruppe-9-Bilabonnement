@@ -1,0 +1,137 @@
+
+/* CSS file for base variables
+   Author: Jonas Jakobsen
+ */
+
+body{
+    background-color: var(--background);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 15vw;
+    background-color: var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2em;
+    color: var(--text-color);
+    height: 10vh;
+    width: calc(100% - 15vw);
+    padding: 1%;
+}
+
+#header-right-side{
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+#logout-button{
+    color: var(--text-color);
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1em;
+}
+
+.nav-button{
+    color: var(--text-color);
+    background: none;
+    border: none;
+    font-size: 2em;
+    text-decoration: none;
+    width: 100%;
+    padding: 1vh;
+}
+
+.nav-button:hover{
+    background-color: var(--accent);
+    border-radius: 10px;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary);
+    height: 100vh;
+    width: 15vw;
+    min-width: 130px;
+    padding: 2vh;
+    overflow: hidden;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 15vw 1fr;
+    margin-top: 10vh;
+    height: calc(100vh - 10vh);
+}
+
+.content {
+    background-color: var(--background);
+    display: block;
+    margin-left: 15vw;
+    padding: 10%;
+    height: calc(100vh - 10vh);
+    text-align: left;
+    width: calc(100vw - 15vw);
+}
+
+button{
+    background-color: var(--accent);
+    border-radius: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+
+.content h1{
+    font-size: 2.5em;
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color: white;
+    padding: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 5px;
+}
+
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(33.33% - 20px);
+    margin-bottom: 15px;
+}
+
+.form-row label {
+    margin-bottom: 5px;
+    font-size: 2em;
+}
+
+
+.form-row input, .form-row select {
+    margin-bottom: 5px;
+    padding: 8px;
+    width: 100%;
+    font-size: 1.5em;
+    border-radius: 5px;
+}
+
+
+.form-row p {
+    font-style: italic;
+    color: #988f8f;
+    font-size: 1.5em;
+    margin-top: 5px;
+}
