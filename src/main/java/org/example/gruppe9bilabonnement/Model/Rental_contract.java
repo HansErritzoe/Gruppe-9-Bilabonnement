@@ -24,7 +24,7 @@ public class Rental_contract {
 
     private String pickup_location;
     private String return_location;
-    private int id_damage_report;
+    private Integer id_damage_report;
 
     public Rental_contract(){
     }
@@ -151,11 +151,11 @@ public class Rental_contract {
         this.return_location = return_location;
     }
 
-    public int getId_damage_report() {
+    public Integer getId_damage_report() {
         return id_damage_report;
     }
 
-    public void setId_damage_report(int id_damage_report) {
+    public void setId_damage_report(Integer id_damage_report) {
         this.id_damage_report = id_damage_report;
     }
 }

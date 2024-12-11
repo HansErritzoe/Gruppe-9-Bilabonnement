@@ -168,11 +168,10 @@ public class HomeController {
             boolean success = carService.updateCar(car);
             if(success){
                 model.addAttribute("successMessage","Success! Ændringer til bilen er gemt.");
-                return car_inventory(session,model);
             } else {
                 model.addAttribute("errorMessage", "Fejl! Ændringerne til bilen blev ikke gemt - kontakt admin for hjælp.");
-                return car_inventory(session,model);
             }
+            return car_inventory(session,model);
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
@@ -196,17 +195,22 @@ public class HomeController {
         }
     }
 
+    /**
+     * Method to handle when user attemts to add a rental contract to the database
+     * @param rental_contract
+     * @return String - returns the user to the rental contract page with error or success message
+     * @Author - Hans Erritzøe og Jonas Jakobsen
+     */
     @PostMapping("/rental_contract/add_rentalcontract")
     public String addRentalcontract(HttpSession session, Model model, @ModelAttribute Rental_contract rental_contract){
         if(userIsLoggedIn(session)){
             boolean success = rentalContractService.addRental_contract(rental_contract);
             if(success){
                 model.addAttribute("successMessage","Success! Lejekontrakt oprettet. ");
-                return "rental_contract/rental_contract";
             } else {
                 model.addAttribute("errorMessage","Der opstod en fejl, lejekontrakten kunne ikke tilføjes til databasen, kontakt admin for hjælp");
-                return "rental_contract/rental_contract";
             }
+            return rental_contract(session,model);
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
@@ -407,11 +411,10 @@ public class HomeController {
             boolean success = damageReportService.updateDamageReport(damage_report);
             if(success){
                 model.addAttribute("successMessage","Success! Ændringer til skaderapporten blev gemt.");
-                return editDamageReport(session,model,damage_report.getId_damage_report());
             } else {
                 model.addAttribute("errorMessage", "Kunne ikke gemme ændringerne til skaderapporten, kontakt admin for hjælp.");
-                return editDamageReport(session,model,damage_report.getId_damage_report());
             }
+            return editDamageReport(session,model,damage_report.getId_damage_report());
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
@@ -450,11 +453,10 @@ public class HomeController {
             boolean success = damageService.addDamage(damage);
             if(success){
                 model.addAttribute("successMessage","Success! Skaden er tilføjet til skaderapporten.");
-                return editDamageReport(session,model,damage.getId_damage_report());
             } else {
                 model.addAttribute("errorMessage", "Fejl! Kunne ikke oprette skaden, kontakt admin for hjælp.");
-                return editDamageReport(session,model,damage.getId_damage_report());
             }
+            return editDamageReport(session,model,damage.getId_damage_report());
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
@@ -475,11 +477,10 @@ public class HomeController {
             boolean success = damageService.deleteDamageByID(id);
             if(success){
                 model.addAttribute("successMessage","Success! Skaden er slettet.");
-                return editDamageReport(session,model,report_id);
             } else {
                 model.addAttribute("errorMessage", "Fejl! Kunne ikke slette skaden, kontakt admin for hjælp.");
-                return editDamageReport(session,model,report_id);
             }
+            return editDamageReport(session,model,report_id);
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";
@@ -517,11 +518,10 @@ public class HomeController {
             boolean success = damageService.updateDamage(damage);
             if(success){
                 model.addAttribute("successMessage","Success! Ændringer til skaden er gemt.");
-                return editDamageReport(session,model,damage.getId_damage_report());
             } else {
                 model.addAttribute("errorMessage", "Fejl! Ændringerne til skaden blev ikke gemt - kontakt admin for hjælp.");
-                return editDamageReport(session,model,damage.getId_damage_report());
             }
+            return editDamageReport(session,model,damage.getId_damage_report());
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
             return "login/loginPage";

@@ -21,7 +21,7 @@
         <div th:if="${successMessage}" class="success_message" th:text="${successMessage}"></div>
         <div th:if="${errorMessage}" class="failure_message" th:text="${errorMessage}"></div>
         <div>
-            <a th:href="@{/rental_contract/add_rentalcontract}" class="add_element_button" >
+            <a th:href="@{/rental_contract/add_rentalcontract}" class="add_element_button">
                 <button>Opret Lejeaftale</button>
             </a>
         </div>
@@ -29,15 +29,15 @@
             <table>
                 <thead>
                 <tr>
-                    <th>Lejeaftale</th>
-                    <th>Kundenummer</th>
-                    <th>Bilnummer</th>
+                    <th>Leje aftale</th>
+                    <th>Kunde nummer</th>
+                    <th>Bil nummer</th>
                     <th>Start dato</th>
                     <th>Slut dato</th>
                     <th>Status</th>
                     <th>IRK kode</th>
                     <th>Leasing kode</th>
-                    <th>Total pris</th>
+                    <th>Måneds pris</th>
                     <th>Betalings status</th>
                     <th>Afhentnings lokation</th>
                     <th>Retur lokation</th>
@@ -53,22 +53,24 @@
                     <td th:text="${rental_contract.getEnd_date()}"></td>
                     <td th:switch="${rental_contract.status}">
                         <span th:case="'Started'" class="status started">Startet</span>
-                        <span th:case="'Finished'" class="status finished">Sluttet</span>
+                        <span th:case="'Finished'" class="status finished">Afsluttet</span>
                         <span th:case="'Pending Review'" class="status pending-review">Afventer behandling</span>
                     </td>
                     <td th:text="${rental_contract.getIrk_code()}"></td>
                     <td th:text="${rental_contract.getLeasing_code()}"></td>
-                    <td th:text="${rental_contract.getPrice_per_month()}"></td>
+                    <td th:text="${#numbers.formatDecimal(rental_contract.getPrice_per_month(), 2, 2)} + ' DKK '"></td>
                     <td th:switch="${rental_contract.payment_status}">
                         <span th:case="'Paid'" class="status started">Betalt</span>
                         <span th:case="'Unpaid'" class="status finished">Ikke Betalt</span>
                     </td>
                     <td th:text="${rental_contract.getPickup_location()}"></td>
                     <td th:text="${rental_contract.getReturn_location()}"></td>
-                    <td th:text="${rental_contract.getId_damage_report()}"></td>
+                    <td th:if="${rental_contract.id_damage_report != null}"
+                        th:text="${rental_contract.id_damage_report}"></td>
                 </tr>
                 </tbody>
             </table>
+        </div>
     </div>
 </div>
 </body>
