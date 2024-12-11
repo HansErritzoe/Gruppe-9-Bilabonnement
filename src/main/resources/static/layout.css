@@ -21,6 +21,12 @@ header {
     width: calc(100% - 15vw);
     padding: 1%;
 }
+
+#header-right-side{
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
 #logout-button{
     color: var(--text-color);
     background: none;

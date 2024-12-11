@@ -22,9 +22,12 @@
 <div th:fragment="header">
     <header>
            Bilabonnoment A/S
-        <form action="/logout" method="post">
-            <button type="submit" id="logout-button">Log ud</button>
-        </form>
+        <div id="header-right-side">
+            <p>Velkommen, <span th:text="${session.loggedInUser.firstname}"></span></p> │
+                <form action="/logout" method="post">
+                    <button type="submit" id="logout-button">Log ud</button>
+                </form>
+        </div>
     </header>
 </div>
 
