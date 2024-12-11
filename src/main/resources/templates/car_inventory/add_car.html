@@ -16,42 +16,80 @@
     <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
-        <h1> Tilføj Bil </h1>
-        <!-- Displays succes or error message depending on if car was added or not to DB-->
-        <div th:if="${successMessage}" class="car_added_success_message" th:text="${successMessage}"></div>
-        <div th:if="${errorMessage}" class="car_added_failure_message" th:text="${errorMessage}"></div>
+
+        <!-- Displays succes or error message depending on if the car was added or not to the DB-->
+        <div th:if="${successMessage}" class="success_message" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" class="failure_message" th:text="${errorMessage}"></div>
+
         <form th:action="@{/car_inventory/add_car}" method="post">
-            <button type="submit">Gem</button>
-            <label>Stelnummer</label>
-            <input type="text" name="VIN" placeholder="Eks: KSD23034001" required>
-            <p> Indtast bilens stelnummer </p>
-            <label>Mærke</label>
-            <input type="text" name="brand" placeholder="Eks: Fiat">
-            <p> Indtast bilens mærke </p>
-            <label>Model</label>
-            <input type="text" name="model" placeholder="Eks: 200S">
-            <p> Indtast bilens model </p>
-            <label>År</label>
-            <input type="number" name="year" value="2024" min="1960" max="2099" placeholder="Eks: 2003">
-            <p> Indtast bilens produktions år </p>
-            <label>Ejer</label>
-            <input type="text" name="owner" placeholder="Eks: DS-Aarhus" required>
-            <p> Indtast bilens ejer, altså firmaet/personen som ejer bilen, ikke eventuelle udlejere </p>
-            <label>Kilometer kørt</label>
-            <input type="number" name="km_driven" placeholder="Eks: 25000">
-            <p> Indtast antal kilometer som bilen har kørt </p>
-            <label>Kilometer pris</label>
-            <input type="number" step="0.01" name="km_price" placeholder="Eks: 300">
-            <p> Indtast hvad det koster pr. 250 km ekstra om måneden at leje bilen (DKK) </p>
-            <label>Måneds Pris (DKK) </label>
-            <input type="number" step="0.01" name="monthly_price" placeholder="Eks: 4200">
-            <p> Indtast bilens basis månedspris (DKK) </p>
-            <label>Ledighed</label>
-            <select name="available">
-                <option value="true">Ledig</option>
-                <option value="false">Udlejet</option>
-            </select>
-            <p> Vælg om bilen er ledig eller udlejet </p>
+            <!-- All fields in a flex container -->
+            <div class="form-container">
+
+                <div class="headline_div">
+                <h1> Tilføj Bil </h1>
+                <div class="seperator-line"></div>
+
+                </div>
+                <div class="form-row">
+                    <label>Stelnummer</label>
+                    <input type="text" name="VIN" placeholder="Eks: 'KSD23034001'" required>
+                    <p> Indtast bilens stelnummer </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Mærke</label>
+                    <input type="text" name="brand" placeholder="Eks: 'Fiat'">
+                    <p> Indtast bilens mærke </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Model</label>
+                    <input type="text" name="model" placeholder="Eks: '200S'">
+                    <p> Indtast bilens model </p>
+                </div>
+
+                <div class="form-row">
+                    <label>År</label>
+                    <input type="number" name="year" value="2024" min="1960" max="2099" placeholder="Eks: '2003'">
+                    <p> Indtast bilens produktions år </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Ejer</label>
+                    <input type="text" name="owner" placeholder="Eks: 'DS-Aarhus'" required>
+                    <p> Indtast bilens ejer, altså firmaet/personen som ejer bilen, ikke eventuelle udlejere </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Kilometer kørt</label>
+                    <input type="number" name="km_driven" placeholder="Eks: '25000'">
+                    <p> Indtast antal kilometer som bilen har kørt </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Kilometer pris</label>
+                    <input type="number" step="0.01" name="km_price" placeholder="Eks: '300'">
+                    <p> Indtast hvad det koster pr. 250 km ekstra om måneden at leje bilen (DKK) </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Måneds Pris (DKK) </label>
+                    <input type="number" step="0.01" name="monthly_price" placeholder="Eks: '4200'">
+                    <p> Indtast bilens basis månedspris (DKK) </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Ledighed</label>
+                    <select name="available">
+                        <option value="true">Ledig</option>
+                        <option value="false">Udlejet</option>
+                    </select>
+                    <p> Vælg om bilen er ledig eller udlejet </p>
+
+                </div>
+
+                <button type="submit">Gem</button>
+
         </form>
     </div>
 </div>

@@ -16,74 +16,108 @@
     <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
-        <h1> Rediger Skaderapport ID: <span th:text="${damageReport.id_damage_report}"> </span></h1>
-        <!-- Displays succes or error message depending on if the damage report was added or not to the DB-->
-        <div th:if="${successMessage}" th:text="${successMessage}"></div>
-        <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
-        <form th:action="@{'/damage_report/edit_damage_report'+${damageReport.id_damage_report}}" method="post">
-            <button type="submit">Gem Ændringer</button>
-            <label>Bilens Vognnummer</label>
-            <input type="number" th:value="${damageReport.car_id_vehicle}" name="car_id_vehicle" placeholder="Eks: 23"
-                   required>
-            <p> Indtast vognnummeret for den bil som skaderapporten er for, eks: "232" </p>
-            <label>Total Pris</label>
-            <input type="number" th:value="${damageReport.price_total}" name="price_total" readonly>
-            <p>Skaderapportens totale pris - kan ikke redigeres, udregnes automatisk </p>
-            <label>Dato</label>
-            <input type="date" th:value="${damageReport.date}" name="date" placeholder="Eks: '02-03-2024" required>
-            <p>Indtast datoen for hvornår denne skaderapport er oprettet</p>
-            <label>Udfyldt af</label>
-            <input type="text" th:value="${damageReport.filled_by}" name="filled_by"
-                   placeholder="Eks: Mikael Henningsen" required>
-            <p> Indtast hvem denne skaderapport er udfyldt af</p>
-            <label>Betalings status </label>
-            <select name="payment_status">
-                <option value="Unpaid" th:selected="${damageReport.payment_status == 'Unpaid'}">Ubetalt</option>
-                <option value="Paid" th:selected="${damageReport.payment_status == 'Paid'}">Betalt</option>
-            </select>
-            <p> Angiv om skaderapporten er betalt eller ej </p>
-        </form>
-        <div>
-            <h1>Skader </h1>
-            <p> Herunder kan du tilføje, redigere eller slette skader tilhørende denne skaderapport </p>
-            <div>
-                <a th:href="@{'/damage/add_damage'+${damageReport.id_damage_report}}">
-                    <button>Tilføj Skade</button>
-                </a>
+
+        <!-- Displays succes or error message depending on if the changes was added or not to the DB-->
+        <div th:if="${successMessage}" class="success_message" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" class="failure_message" th:text="${errorMessage}"></div>
+
+        <div class="form-container" style="padding-right: 20px;">
+
+            <div class="headline_div">
+                <h1> Rediger Skaderapport ID: <span th:text="${damageReport.id_damage_report}"> </span></h1>
+                <div class="seperator-line" style="width: 100%;"></div>
             </div>
-            <div id="damage_table_div">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Skade ID</th>
-                        <th>Type</th>
-                        <th>Placering</th>
-                        <th>Pris</th>
-                        <th>Handlinger </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="damage : ${damageList}">
-                        <td th:text="${damage.id_damage}"></td>
-                        <td th:text="${damage.type}"></td>
-                        <td th:text="${damage.placement}"></td>
-                        <td th:text="${#numbers.formatDecimal(damage.price, 2, 2)} + ' DKK '"></td>
-                        <td> <!-- Edit functionality not implemented yet -->
-                            <a th:href="@{'/damage/edit_damage/'+${damage.id_damage}}" class="table_edit_button">Rediger</a>
-                            <a th:href="@{'/delete_damage/'+${damage.id_damage}+'/'+${damage.id_damage_report}}" class="table_delete_button">Slet</a>
-                        </td>
-                    </tr>
-                    <!-- Add empty rows if there are fewer than 3 rows to avoid just having an empty header for the table -->
-                    <!-- The #numbers.sequence(1,3-list.size()) is a sequence of numbers starting from 1 up to 3-list size   -->
-                    <!-- The th:each loop then for each number in the sequence fills a row with "$nbsp" which is non-breaking spaces-->
-                    <tr th:if="${damageList.size() < 3}" th:each="i : ${#numbers.sequence(1, 3 - damageList.size())}">
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tbody>
-                </table>
+
+            <form th:action="@{'/damage_report/edit_damage_report'+${damageReport.id_damage_report}}" method="post">
+                <!-- All fields in a flex container -->
+                <div class="form-container">
+
+                    <div class="form-row">
+                        <label>Bilens Vognnummer</label>
+                        <input type="number" th:value="${damageReport.car_id_vehicle}" name="car_id_vehicle"
+                               placeholder="Eks: 23"
+                               required>
+                        <p> Indtast vognnummeret for den bil som skaderapporten er for, eks: "232" </p>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Total Pris</label>
+                        <input type="number" th:value="${damageReport.price_total}" name="price_total" readonly>
+                        <p>Skaderapportens totale pris - kan ikke redigeres, udregnes automatisk </p>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Dato</label>
+                        <input type="date" th:value="${damageReport.date}" name="date" placeholder="Eks: '02-03-2024"
+                               required>
+                        <p>Indtast datoen for hvornår denne skaderapport er oprettet</p>
+                    </div>
+                    <div class="form-row">
+                        <label>Udfyldt af</label>
+                        <input type="text" th:value="${damageReport.filled_by}" name="filled_by"
+                               placeholder="Eks: Mikael Henningsen" required>
+                        <p> Indtast hvem denne skaderapport er udfyldt af</p>
+                    </div>
+                    <div class="form-row">
+                        <label>Betalings status </label>
+                        <select name="payment_status">
+                            <option value="Unpaid" th:selected="${damageReport.payment_status == 'Unpaid'}">Ubetalt
+                            </option>
+                            <option value="Paid" th:selected="${damageReport.payment_status == 'Paid'}">Betalt</option>
+                        </select>
+                        <p> Angiv om skaderapporten er betalt eller ej </p>
+                    </div>
+                    <!-- adding a filler div to push button to next row -->
+                    <div class="filler-div"></div>
+                    <button type="submit">Gem Ændringer</button>
+
+                </div>
+            </form>
+            <div>
+                <h2>Skader </h2>
+                <p id="damage_description"> Herunder kan du tilføje, redigere eller slette skader tilhørende denne skaderapport </p>
+                <div>
+                    <a th:href="@{'/damage/add_damage'+${damageReport.id_damage_report}}">
+                        <button>Tilføj Skade</button>
+                    </a>
+                </div>
+                <div id="damage_table_div">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Skade ID</th>
+                            <th>Type</th>
+                            <th>Placering</th>
+                            <th>Pris</th>
+                            <th>Handlinger</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="damage : ${damageList}">
+                            <td th:text="${damage.id_damage}"></td>
+                            <td th:text="${damage.type}"></td>
+                            <td th:text="${damage.placement}"></td>
+                            <td th:text="${#numbers.formatDecimal(damage.price, 2, 2)} + ' DKK '"></td>
+                            <td> <!-- Edit functionality not implemented yet -->
+                                <a th:href="@{'/damage/edit_damage/'+${damage.id_damage}}"
+                                   class="table_edit_button">Rediger</a>
+                                <a th:href="@{'/delete_damage/'+${damage.id_damage}+'/'+${damage.id_damage_report}}"
+                                   class="table_delete_button">Slet</a>
+                            </td>
+                        </tr>
+                        <!-- Add empty rows if there are fewer than 3 rows to avoid just having an empty header for the table -->
+                        <!-- The #numbers.sequence(1,3-list.size()) is a sequence of numbers starting from 1 up to 3-list size   -->
+                        <!-- The th:each loop then for each number in the sequence fills a row with "$nbsp" which is non-breaking spaces-->
+                        <tr th:if="${damageList.size() < 3}"
+                            th:each="i : ${#numbers.sequence(1, 3 - damageList.size())}">
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

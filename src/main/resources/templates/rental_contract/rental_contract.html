@@ -14,9 +14,16 @@
     <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
+
         <h1>Lejeaftaler</h1>
+
+        <!-- Displays succes or error message depending on if the rental contract was added or not to the DB-->
+        <div th:if="${successMessage}" class="success_message" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" class="failure_message" th:text="${errorMessage}"></div>
         <div>
-            <a th:href="@{rental_contract/add_rentalcontract}">Tilføj Lejeaftale</a>
+            <a th:href="@{/rental_contract/add_rentalcontract}" class="add_element_button" >
+                <button>Opret Lejeaftale</button>
+            </a>
         </div>
         <div id="table_div">
             <table>
@@ -45,7 +52,7 @@
                     <td th:text="${rental_contract.getStart_date()}"></td>
                     <td th:text="${rental_contract.getEnd_date()}"></td>
                     <td th:switch="${rental_contract.status}">
-                        <span th:case="'Started'" class="status started">Startede</span>
+                        <span th:case="'Started'" class="status started">Startet</span>
                         <span th:case="'Finished'" class="status finished">Sluttet</span>
                         <span th:case="'Pending Review'" class="status pending-review">Afventer behandling</span>
                     </td>

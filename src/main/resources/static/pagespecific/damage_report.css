@@ -1,38 +1,8 @@
-/* CSS Code Specific for the damage_report page(s) */
+/* CSS Code Specific for the damage_report pages */
 /* Author: Hans Erritzøe */
-
-.content {
-    padding-left: 25%;
-}
-
-h1 {
-    font-size: 2.5rem;
-}
 
 thead th {
     white-space: nowrap;
-}
-
-#add_damage_report_button {
-    display: flex;
-    white-space: nowrap;
-    margin-bottom: 0.3vh;
-}
-
-#add_damage_report_button button {
-    color: white;
-    font-size: 1.2rem;
-    padding: 4px 7px;
-    border-radius: 8px;
-    border: none;
-    background-color: var(--accent);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
-}
-
-#add_damage_report_button button:hover {
-    background-color: #154965;
 }
 
 .status {
@@ -53,8 +23,22 @@ thead th {
     color: #000;
 }
 
-/* For some reason this was automatically applied to the css from the browser
+/* For some reason this was automatically applied to the css in browsers
 and had to be set to none to avoid underline on the button text */
 a:-webkit-any-link {
     text-decoration: none;
 }
+
+/* Edit damage report css below */
+
+h2 {
+    font-size: 2em;
+    margin: 0;
+}
+
+#damage_description {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+/* Edit damage report css ends here */

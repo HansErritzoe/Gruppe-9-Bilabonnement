@@ -13,7 +13,9 @@
 </head>
 <body>
 <div id="login_box">
+
     <h1> Bilabonnement A/S</h1>
+
     <div id="login_box_form_div">
         <form action="/login" method="post">
             <h2> Medarbejder Login </h2>
@@ -24,6 +26,7 @@
             <button type="submit">Login</button>
         </form>
     </div>
+
     <!-- Displays appropriate error message if fails to login -->
     <div th:if="${loginErrorMessage}" id="loginErrorMessage" th:text="${loginErrorMessage}"></div>
     <!-- Display logged out message if user has successfully logged out-->

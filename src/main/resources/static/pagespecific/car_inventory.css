@@ -1,56 +1,5 @@
 /* CSS Code Specific for the car_inventory page(s) */
 /* Author: Hans Erritzøe */
-h1 {
-    font-size: 2.5rem;
-}
-
-.content {
-    padding-left: 25%;
-}
-
-.car_added_failure_message {
-    color: #d56262;
-    font-size: 1.5rem;
-    width: 60vw;
-    white-space: nowrap;
-    margin-bottom: 2vh;
-}
-
-.car_added_success_message {
-    color: green;
-    font-size: 1.5rem;
-    width: 60vw;
-    white-space: nowrap;
-    margin-bottom: 2vh;
-}
-
-#add_car_button {
-    display: flex;
-    white-space: nowrap;
-    margin-bottom: 0.3vh;
-}
-
-#add_car_button button {
-    color: white;
-    font-size: 1.2rem;
-    padding: 4px 7px;
-    border-radius: 8px;
-    border: none;
-    background-color: var(--accent);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
-}
-
-#add_car_button button:hover {
-    background-color: #154965;
-}
-
-/* For some reason this was automatically applied to the css from the browser
-and had to be set to none to avoid underline on the button text */
-a:-webkit-any-link {
-    text-decoration: none;
-}
 
 .status {
     display: inline-block; /* defines the status labels as an inline block, making it not take up the entire space of the datacell */

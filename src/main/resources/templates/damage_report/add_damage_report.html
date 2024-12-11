@@ -16,25 +16,50 @@
     <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
-        <h1> Opret Skaderapport </h1>
-        <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <div th:if="${errorMessage}" class="failure_message" th:text="${errorMessage}"></div>
+
         <form th:action="@{/damage_report/add_damage_report}" method="post">
-            <button type="submit">Gem</button>
-            <label>Bilens Vognnummer</label>
-            <input type="text" name="car_id_vehicle" placeholder="Eks: 23" required>
-            <p> Indtast vognnummeret for den bil som skaderapporten er for, eks: "232" </p>
-            <label>Dato</label>
-            <input type="date" name="date" placeholder="Eks: '02-03-2024" required>
-            <p>Indtast datoen for hvornår denne skaderapport er oprettet</p>
-            <label>Udfyldt af</label>
-            <input type="text" name="filled_by" placeholder="Eks: Mikael Henningsen" required>
-            <p> Indtast hvem denne skaderapport er udfyldt af</p>
-            <label>Betalings status </label>
-            <select name="payment_status">
-                <option value="Unpaid">Ubetalt</option>
-                <option value="Paid">Betalt</option>
-            </select>
-            <p> Angiv om skaderapporten er betalt eller ej </p>
+            <!-- All fields in a flex container -->
+            <div class="form-container">
+                <div class="headline_div">
+                    <h1> Opret Skaderapport </h1>
+                    <div class="seperator-line"></div>
+                </div>
+
+                <div class="form-row">
+                    <label>Bilens Vognnummer</label>
+                    <input type="text" name="car_id_vehicle" placeholder="Eks: 23" required>
+                    <p> Indtast vognnummeret for den bil som skaderapporten er for, eks: '120' </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Dato</label>
+                    <input type="date" name="date" placeholder="Eks: '02-03-2024" required>
+                    <p>Indtast datoen for hvornår denne skaderapport er oprettet, eks: '12-12-2024' </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Udfyldt af</label>
+                    <input type="text" name="filled_by" placeholder="Eks: Mikael Henningsen" required>
+                    <p> Indtast hvem denne skaderapport er udfyldt, eks: 'Mikael Henningsen' af</p>
+                </div>
+
+                <div class="form-row">
+                    <label>Betalings status </label>
+                    <select name="payment_status">
+                        <option value="Unpaid">Ubetalt</option>
+                        <option value="Paid">Betalt</option>
+                    </select>
+                    <p> Angiv om skaderapporten er betalt eller ej </p>
+                </div>
+                <!-- adding two filler divs to push the "Gem" button to next line  -->
+                <div class="filler-div"></div>
+                <div class="filler-div"></div>
+
+                <button type="submit">Gem</button>
+
+            </div>
         </form>
     </div>
 </div>

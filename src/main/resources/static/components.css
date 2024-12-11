@@ -2,6 +2,54 @@
    Author: Hans og Jonas
 */
 
+.failure_message {
+    color: #e57e7e;
+    font-size: 1.5rem;
+    width: 60vw;
+    white-space: nowrap;
+    margin-bottom: 2vh;
+    text-decoration: underline;
+}
+
+.success_message {
+    padding-left: 10px;
+    color: var(--accent);
+    font-size: 1.5rem;
+    width: 60vw;
+    white-space: nowrap;
+    margin-bottom: 2vh;
+    text-decoration: underline;
+}
+
+.add_element_button {
+    display: flex;
+    white-space: nowrap;
+    margin-bottom: 0.3vh;
+}
+
+.add_element_button button {
+    color: white;
+    font-size: 1.2rem;
+    padding: 4px 7px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--accent);
+    cursor: pointer;
+    transition: background-color 0.3s ease; /*  */
+    font-weight: bold;
+}
+
+.add_element_button button:hover {
+    background-color: #154965;
+}
+
+/* For some reason this was automatically applied to the css from the browser
+and had to be set to none to avoid underline on the button text */
+a:-webkit-any-link {
+    text-decoration: none;
+}
+
+
 /* Table styling starts here */
 /* Author: Hans Erritzøe */
 

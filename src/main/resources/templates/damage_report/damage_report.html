@@ -17,10 +17,11 @@
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
         <h1>Skaderapporter</h1>
-        <div th:if="${successMessage}" th:text="${successMessage}"></div>
-        <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
+        <!-- Displays succes or error message depending on if the damage report was added or not to the DB-->
+        <div th:if="${successMessage}" class="success_message" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" class="failure_message" th:text="${errorMessage}"></div>
         <div>
-            <a th:href="@{/damage_report/add_damage_report}" id="add_damage_report_button">
+            <a th:href="@{/damage_report/add_damage_report}" class="add_element_button">
                 <button>Opret Skaderapport</button>
             </a>
         </div>

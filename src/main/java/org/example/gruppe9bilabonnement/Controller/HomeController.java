@@ -195,11 +195,24 @@ public class HomeController {
             return "login/loginPage";
         }
     }
+
     @PostMapping("/rental_contract/add_rentalcontract")
-    public String addRentalcontract(@ModelAttribute Rental_contract rental_contract){
-        rentalContractService.addRental_contract(rental_contract);
-        return "rental_contract/rental_contract";
+    public String addRentalcontract(HttpSession session, Model model, @ModelAttribute Rental_contract rental_contract){
+        if(userIsLoggedIn(session)){
+            boolean success = rentalContractService.addRental_contract(rental_contract);
+            if(success){
+                model.addAttribute("successMessage","Success! Lejekontrakt oprettet. ");
+                return "rental_contract/rental_contract";
+            } else {
+                model.addAttribute("errorMessage","Der opstod en fejl, lejekontrakten kunne ikke tilføjes til databasen, kontakt admin for hjælp");
+                return "rental_contract/rental_contract";
+            }
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
     }
+
     /**
      * Method for returning the rental_contract html file address
      * @return string with rental_contract address if user is logged in, else it returns the user to the login page with error message

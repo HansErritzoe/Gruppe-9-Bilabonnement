@@ -15,20 +15,43 @@
     <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
-        <h1> Rediger skade: <span th:text="${damage.id_damage}"> </span></h1>
+
         <form th:action="@{/damage/edit_damage}" method="post">
-            <button type="submit">Gem Ændringer</button>
-            <label>Type</label>
-            <input type="text" name="type" th:value="${damage.type}" placeholder="Eks: Ridset Rude" required>
-            <p> Indtast hvilken type skade det er, eks: "Bule" </p>
-            <label>Placering</label>
-            <input type="text" name="placement" th:value="${damage.placement}" placeholder="Eks: 'Venstre forrude" required>
-            <p>Indtast hvor på bilen skaden er, eks: 'Venstre Forhjul"</p>
-            <label>Pris</label>
-            <input type="number" name="price" th:value="${damage.price}" step="0.01" placeholder="Eks: 2000" required>
-            <p> Indtast prisen for denne skade</p>
-            <input type="hidden" name="id_damage_report" th:value="${damage.id_damage_report}">
-            <input type="hidden" name="id_damage" th:value="${damage.id_damage}">
+            <!-- All fields in a flex container -->
+            <div class="form-container">
+
+                <div class="headline_div">
+                    <h1> Rediger skade: <span th:text="${damage.id_damage}"> </span></h1>
+                    <div class="seperator-line"></div>
+                </div>
+
+                <div class="form-row">
+                    <label>Type</label>
+                    <input type="text" name="type" th:value="${damage.type}" placeholder="Eks: Ridset Rude" required>
+                    <p> Indtast hvilken type skade det er, eks: "Bule" </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Placering</label>
+                    <input type="text" name="placement" th:value="${damage.placement}"
+                           placeholder="Eks: 'Venstre forrude" required>
+                    <p>Indtast hvor på bilen skaden er, eks: 'Venstre Forhjul"</p>
+                </div>
+
+                <div class="form-row">
+                    <label>Pris</label>
+                    <input type="number" name="price" th:value="${damage.price}" step="0.01" placeholder="Eks: 2000"
+                           required>
+                    <p> Indtast prisen for denne skade</p>
+                </div>
+
+                <button type="submit">Gem Ændringer</button>
+
+                <input type="hidden" name="id_damage_report" th:value="${damage.id_damage_report}">
+                <input type="hidden" name="id_damage" th:value="${damage.id_damage}">
+
+
+            </div>
         </form>
     </div>
 </div>

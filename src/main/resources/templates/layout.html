@@ -21,7 +21,7 @@
 <!-- Header -->
 <div th:fragment="header">
     <header>
-           Bilabonnoment A/S
+           Bilabonnement A/S
         <div id="header-right-side">
             <p>Velkommen, <span th:text="${session.loggedInUser.firstname}"></span></p> │
                 <form action="/logout" method="post">
@@ -37,10 +37,10 @@
             <a href="/dashboard" class="nav-button">Dashboard</a>
             <a href="/car_inventory" class="nav-button">Biler</a>
             <a href="/rental_contract" class="nav-button">Lejeaftaler</a>
-            <a href="/sale_contract"class="nav-button">Købsaftaler</a>
-            <a href="/damage_report"class="nav-button">Skadesrapporter</a>
-            <a href="/condition_report"class="nav-button">Tilstandsrapport</a>
-            <a href="/customer"class="nav-button">Kunder</a>
+            <a href="/sale_contract" class="nav-button">Købsaftaler</a>
+            <a href="/damage_report" class="nav-button">Skadesrapporter</a>
+            <a href="/condition_report" class="nav-button">Tilstandsrapport</a>
+            <a href="/customer" class="nav-button">Kunder</a>
     </nav>
 </div>
 

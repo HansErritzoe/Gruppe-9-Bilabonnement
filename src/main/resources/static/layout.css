@@ -83,55 +83,91 @@ nav {
 
 button{
     background-color: var(--accent);
+    padding: 4px 8px;
     border-radius: 5px;
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 1.5em;
+    font-size: 1.6em;
 }
 
 .content h1{
     font-size: 2.5em;
 }
 
+
 .form-container {
     display: flex;
     flex-wrap: wrap;
+    /* box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1); /* adds an inner shadow to the container, 2=horizontal offset, 2=vertical offset, 4= blur radius */
     gap: 20px;
     background-color: white;
-    padding: 1%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    border-radius: 5px;
+    padding: 20px;
+    padding-right: 0;
+    margin-top: 0.1%;
+    margin-bottom: 0;
+    border-radius: 2px;
+    /* Below adds inner shadow to the container */
+    /* inset = inner instead of outer, first value = vertical distance, second is horizontal, third is blur, last is color*/
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2),  /* Top */
+    inset 0 -1px 1px rgba(0, 0, 0, 0.2), /* Bottom */
+    inset 1px 0 1px rgba(0, 0, 0, 0.2),  /* Left */
+    inset -1px 0 1px rgba(0, 0, 0, 0.2); /* Right */
 }
 
+.headline_div {
+    width: 100%;
+}
+.form-container h1 {
+    margin: 0;
+    margin-bottom: 1%;
+    width: 100%;
+}
+
+.seperator-line {
+    padding-right: 20px;
+    margin: 0;
+    width: calc(100% - 20px);
+    height: 2px;
+    border-radius: 4px;
+    background-color: #9d9d9d;
+}
 
 .form-row {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: calc(33.33% - 20px);
-    margin-bottom: 15px;
+
 }
 
 .form-row label {
     margin-bottom: 5px;
-    font-size: 2em;
+    font-size: 1.4em;
 }
 
 
 .form-row input, .form-row select {
     margin-bottom: 5px;
-    padding: 8px;
+    padding: 5px;
     width: 100%;
-    font-size: 1.5em;
-    border-radius: 5px;
+    font-size: 1em;
+    border-radius: 4px;
+    border: 1px solid dimgrey;
 }
 
 
 .form-row p {
     font-style: italic;
-    color: #988f8f;
-    font-size: 1.5em;
-    margin-top: 5px;
+    color: #949494;
+    font-size: 1em;
+    margin-top: 1px;
+    padding-left: 3px;
+}
+
+.filler-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(33.33% - 20px);
 }
