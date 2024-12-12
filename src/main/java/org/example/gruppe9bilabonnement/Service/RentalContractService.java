@@ -37,4 +37,8 @@ public class RentalContractService {
     public int getExpectedRevenue(){
         return rentalcontractRepository.getExpectedRevenue();
     }
+
+    public int getHandleTotal(){
+        return rentalcontractRepository.getHandleTotal();
+    }
 }

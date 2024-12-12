@@ -65,6 +65,7 @@ public class CarRepository {
         return template.queryForObject(sql, Integer.class);
     }
 
+
     /**
      * Method for adding the car to the database, returns false if failure, true if not
      * @param car - car to be added to the database

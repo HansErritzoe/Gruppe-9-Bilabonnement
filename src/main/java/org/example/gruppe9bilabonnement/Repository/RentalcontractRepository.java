@@ -55,4 +55,9 @@ public class RentalcontractRepository {
         }
         else return 0;
     }
+
+    public int getHandleTotal() {
+        String sql = "SELECT COUNT(*) FROM rental_contract WHERE status = 'Pending Review'";
+        return template.queryForObject(sql, Integer.class);
+    }
 }
