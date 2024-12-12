@@ -33,4 +33,8 @@ public class RentalContractService {
     public boolean addRental_contract(Rental_contract rental_contract) {
         return rentalcontractRepository.addRental_contract(rental_contract);
     }
+
+    public int getExpectedRevenue(){
+        return rentalcontractRepository.getExpectedRevenue();
+    }
 }

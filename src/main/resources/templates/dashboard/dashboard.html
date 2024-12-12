@@ -8,7 +8,9 @@
     <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
-        <h1>Test</h1>
+        Rented out: <span th:text="${UnavailableTotal}"></span>
+        Available: <span th:text="${AvailableTotal}"></span>
+        Expected Revenue <span th:text="${ExpectedRevenue}"></span>
     </div>
 </div>
 </body>

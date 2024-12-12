@@ -33,6 +33,9 @@ public class CarService {
         return carRepository.getCarsByIdOrVin(query);
     }
 
+    public int getUnavailableTotal(){ return carRepository.getUnavailableTotal();}
+
+    public int getAvailableTotal() { return carRepository.getAvailableTotal();}
 
     /**
      * Method to call repository layer to add car to database, returns false if failed to add, true if car added to DB

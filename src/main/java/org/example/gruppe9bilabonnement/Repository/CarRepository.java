@@ -46,6 +46,26 @@ public class CarRepository {
     }
 
     /**
+     * Method for getting the total amount of cars that are rented out
+     * @return Integer of total amount of cars that aren't available
+     * @Author Jonas Jakobsen
+     */
+    public int getUnavailableTotal() {
+        String sql = "SELECT COUNT(*) FROM car WHERE available = false";
+        return template.queryForObject(sql, Integer.class);
+    }
+
+    /**
+     * Method for getting the total amount of cars that aren't rented out
+     * @return Integer of total amount of cars that are available
+     * @Author Jonas Jakobsen
+     */
+    public int getAvailableTotal() {
+        String sql = "SELECT COUNT(*) FROM car WHERE available = true";
+        return template.queryForObject(sql, Integer.class);
+    }
+
+    /**
      * Method for adding the car to the database, returns false if failure, true if not
      * @param car - car to be added to the database
      * @return boolean - false if failed to add car to db, true if added successfully

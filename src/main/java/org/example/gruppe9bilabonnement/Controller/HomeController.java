@@ -2,6 +2,7 @@ package org.example.gruppe9bilabonnement.Controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.example.gruppe9bilabonnement.Model.*;
+import org.example.gruppe9bilabonnement.Repository.CarRepository;
 import org.example.gruppe9bilabonnement.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,12 @@ public class HomeController {
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model){
         if(userIsLoggedIn(session)){
+            int availableTotal = carService.getAvailableTotal();
+            model.addAttribute("AvailableTotal", availableTotal);
+            int unavailableTotal = carService.getUnavailableTotal();
+            model.addAttribute("UnavailableTotal", unavailableTotal);
+            int expectedRevenue = rentalContractService.getExpectedRevenue();
+            model.addAttribute("ExpectedRevenue", expectedRevenue);
             return "dashboard/dashboard";
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
@@ -247,7 +254,7 @@ public class HomeController {
             if(userService.doesUsernameMatchPassword(username,password)){
                 User user = userService.retrieveUserByUsername(username);
                 session.setAttribute("loggedInUser", user);
-                return "dashboard/dashboard";
+                return "redirect:/dashboard"; //Redirecter til dashboard mapping for at sikre sig at session medbringer korrekte data - Tilføjet af Jonas Jakobsen
             } else { //if username and password don't match, display errormessage
                 model.addAttribute("loginErrorMessage", "Brugernavn og password matcher ikke - Kontakt admin hvis du har glemt dit kodeord eller brugernavn.");
                 return "login/loginPage";

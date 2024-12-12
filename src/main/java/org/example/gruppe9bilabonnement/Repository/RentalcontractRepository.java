@@ -31,7 +31,7 @@ public class RentalcontractRepository {
     /**
      * Method for adding the car to the database, returns false if failure, true if not
      * @param rental_contract - rental to be added to the database
-     * @return boolean - false if failed to add car to db, true if added successfully
+     * @return boolean - false if failed to add rentalcontract to db, true if added successfully
      * @Author Jonas Jakobsen
      */
     public boolean addRental_contract(Rental_contract rental_contract){
@@ -45,5 +45,14 @@ public class RentalcontractRepository {
         } catch (DataAccessException errorMessage){
             return false;
         }
+    }
+
+    public int getExpectedRevenue(){
+        String sql = "SELECT SUM(price_per_month) FROM rental_contract";
+        Integer total = template.queryForObject(sql, Integer.class);
+        if (total != null){
+            return total;
+        }
+        else return 0;
     }
 }
