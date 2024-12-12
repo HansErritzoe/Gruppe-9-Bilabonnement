@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        Author: Hans Erritzøe
+        Created: 12/12-2024
+        Description: Page for displaying searchable list of all customers in the database
+        Version: 1.0
+      -->
+    <script src="http://localhost:35729/livereload.js"></script>
+    <div th:replace="~{layout :: common-head}"></div>
+</head>
+<body>
+<div class="main-content">
+    <div th:replace="~{layout :: header}"></div>
+    <div th:replace="~{layout :: navbar}"></div>
+    <div class="content">
+        <h1>Kunder</h1>
+        <!-- Displays succes or error message depending on if the changes was added or not to the DB-->
+        <div th:if="${successMessage}" class="success_message" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" class="failure_message" th:text="${errorMessage}"></div>
+        <div>
+            <a th:href="@{/customer/add_customer}" class="add_element_button">
+                <button>Tilføj Kunde</button>
+            </a>
+        </div>
+        <div id="table_search_div">
+            <form th:action="@{/customer_search}" method="post">
+                <input type="text" name="query" placeholder="Søg på Kunde ID"/>
+                <button type="submit">Søg</button>
+            </form>
+            <a th:if="${filterOn} == true" th:href="@{/customer}" class="clear_search_button">
+                <button>Ryd filter</button>
+            </a>
+        </div>
+        <div id="table_div">
+            <table>
+                <thead>
+                <tr>
+                    <th>Kunde ID</th>
+                    <th>Fornavn</th>
+                    <th>Efternavn</th>
+                    <th>E-mail</th>
+                    <th>Telefon</th>
+                    <th>Handlinger</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="customer : ${customers}">
+                    <td th:text="${customer.id_customer}"></td>
+                    <td th:text="${customer.firstname}"></td>
+                    <td th:text="${customer.lastname}"></td>
+                    <td th:text="${customer.email}"></td>
+                    <td th:text="${customer.phone}"></td>
+                    <td>
+                        <a th:href="@{'/customer/edit_customer/'+${customer.id_customer}}" class="table_edit_button">Rediger</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

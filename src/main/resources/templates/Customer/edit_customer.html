@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        Author: Hans Erritzøe
+        Created: 4/12-2024
+        Description: Page for editing a customer
+        Version: 1.0
+      -->
+    <script src="http://localhost:35729/livereload.js"></script>
+    <div th:replace="~{layout :: common-head}"></div>
+</head>
+<body>
+<div class="main-content">
+    <div th:replace="~{layout :: header}"></div>
+    <div th:replace="~{layout :: navbar}"></div>
+    <div class="content">
+
+        <form th:action="@{/customer/edit_customer}" method="post">
+            <!-- All fields in a flex container -->
+            <div class="form-container">
+
+                <div class="headline_div">
+                    <h1> Rediger Kunde: <span th:text="${customer.id_customer}"> </span></h1>
+                    <div class="seperator-line"></div>
+                </div>
+
+                <div class="form-row">
+                    <label>Fornavn </label>
+                    <input type="text" name="firstname" th:value="${customer.firstname}" placeholder="Eks: 'Andreas'" required>
+                    <p> Indtast kundens fornavn" </p>
+                </div>
+
+                <div class="form-row">
+                    <label>Efternavn</label>
+                    <input type="text" name="lastname" th:value="${customer.lastname}" placeholder="Eks: 'Larsen'" required>
+                    <p>Indtast kundens efternavn"</p>
+                </div>
+
+                <div class="form-row">
+                    <label>E-mail</label>
+                    <input type="text" name="email" th:value="${customer.email}" placeholder="Eks: 'michael.olsen@example.com'" required>
+                    <p> Indtast kundens e-mail addresse, eks: 'michael.olsen@example.com'</p>
+                </div>
+
+                <div class="form-row">
+                    <label>Telefon Nummer</label>
+                    <input type="text" name="phone" th:value="${customer.phone}" placeholder="Eks: '+45 34225880'" required>
+                    <p> Indtast kundens telefon nummer (med landekode) eks: '+45 30038339'</p>
+                </div>
+
+                <input type="hidden" name="id_customer" th:value="${customer.id_customer}">
+
+                <!-- adding two filler divs to push the "Gem" button to next line  -->
+                <div class="filler-div"></div>
+                <div class="filler-div"></div>
+
+                <button type="submit">Gem Ændringer</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

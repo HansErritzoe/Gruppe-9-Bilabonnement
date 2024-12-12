@@ -5,24 +5,6 @@ thead th {
     white-space: nowrap;
 }
 
-.status {
-    display: inline-block; /* defines the status labels as an inline block, making it not take up the entire space of the datacell */
-    padding: 3px 9px; /* Height then width padding */
-    font-weight: bold;
-    border-radius: 20px;
-    text-align: center;
-    color: white;
-}
-
-.status.paid {
-    background-color: mediumseagreen;
-}
-
-.status.unpaid {
-    background-color: #f1c40f;
-    color: #000;
-}
-
 /* For some reason this was automatically applied to the css in browsers
 and had to be set to none to avoid underline on the button text */
 a:-webkit-any-link {

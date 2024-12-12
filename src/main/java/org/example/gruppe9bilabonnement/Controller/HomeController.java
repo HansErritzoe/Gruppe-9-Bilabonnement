@@ -20,6 +20,9 @@ public class HomeController {
     CarService carService;
 
     @Autowired
+    CustomerService customerService;
+
+    @Autowired
     RentalContractService rentalContractService;
 
     @Autowired
@@ -179,6 +182,119 @@ public class HomeController {
     }
 
     /**
+     * Method for displaying the customer page with a list of all customers
+     * @return String - address for the customer page
+     * @Author - Hans Erritzøe
+     */
+    @GetMapping("/customer")
+    public String customer(HttpSession session, Model model){
+        if(userIsLoggedIn(session)){
+            List<Customer> customers = customerService.getAllCustomers();
+            model.addAttribute("customers",customers);
+            return "customer/customers";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for displaying the add customer page
+     * @return String - address for the add customer page
+     * @Author - Hans Erritzøe
+     */
+    @GetMapping("customer/add_customer")
+    public String addCustomer(HttpSession session, Model model){
+        if(userIsLoggedIn(session)){
+            return "customer/add_customer";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for handling when user attempts to search for customer by customer id
+     * @param query - String query of the user's input in the search bar
+     * @return String - address of the customer list page with added search result
+     */
+    @PostMapping("/customer_search")
+    public String customer_search(HttpSession session, Model model, @RequestParam String query){
+        if(userIsLoggedIn(session)){
+            List<Customer> customerList = customerService.getCustomerByID(query);
+            model.addAttribute("customers",customerList);
+            model.addAttribute("filterOn", true); //enables displaying the "clear filter" button
+            return "customer/customers";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for handling when user attempts to add a customer to the database
+     * @param customer - Customer object to be inserted into the DB
+     * @return String - address with the customer page with added success or error message to model
+     * @Author - Hans Erritzøe
+     */
+    @PostMapping("customer/add_customer")
+    public String addCustomer(HttpSession session, Model model, @ModelAttribute Customer customer){
+        if(userIsLoggedIn(session)){
+            boolean success = customerService.addCustomer(customer);
+            if(success){
+                model.addAttribute("successMessage","Success! Kunden er tilføjet databasen.");
+            } else {
+                model.addAttribute("errorMessage", "Fejl! Kunden kunne ikke gemmes i databasen - kontakt admin for hjælp.");
+            }
+            return customer(session,model);
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for displaying the edit customer page with a customer to be editted
+     * @param id - id of the customer to be edited
+     * @return String - address of the edit_customer page
+     * @Author - Hans Erritzøe
+     */
+    @GetMapping("customer/edit_customer/{id_customer}")
+    public String editCustomer(HttpSession session, Model model, @PathVariable("id_customer") int id){
+        if(userIsLoggedIn(session)){
+            Customer customerToBeEdited = customerService.getCustomerByID(id);
+            model.addAttribute("customer",customerToBeEdited);
+            return "customer/edit_customer";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for handling when user attempts to save edits to a customer in the database
+     * @param customer - Customer object containing the editted values of the customer
+     * @return String - returns customer page address with error or success message added to model
+     * @Author - Hans Erritzøe
+     */
+    @PostMapping("customer/edit_customer")
+    public String editCustomer(HttpSession session, Model model, @ModelAttribute Customer customer){
+        if(userIsLoggedIn(session)){
+            boolean success = customerService.updateCustomer(customer);
+            if(success){
+                model.addAttribute("successMessage","Success! Kunden er tilføjet databasen.");
+            } else {
+                model.addAttribute("errorMessage", "Fejl! Kunden kunne ikke gemmes i databasen - kontakt admin for hjælp.");
+            }
+            return customer(session,model);
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+
+    /**
      * Method for displaying the add_rentalcontract html page where user can add rental contracts to the database
      * @param session - HTTPSession object used for checking that user is logged in
      * @param model - Model object used for displaying error message if user attempts to access without loggin in
@@ -218,6 +334,40 @@ public class HomeController {
     }
 
     /**
+     * Method for displaying the edit rental contract page where user can see and edit the details of a rental contract
+     * @param id - ID of the rental contract to be editted
+     * @return String - returns the string with the address to the edit rental contract html file
+     * @Author - Hans Erritzøe
+     */
+    @GetMapping("rental_contract/edit_rentalcontract/{id_rental_contract}")
+    public String editRental_contract(HttpSession session, Model model,@PathVariable("id_rental_contract") int id){
+        if(userIsLoggedIn(session)){
+            Rental_contract contractToBeEdited = rentalContractService.getRentalContractByID(id);
+            model.addAttribute("rental_contract", contractToBeEdited);
+            return "rental_contract/edit_rentalcontract";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    @PostMapping("rental_contract/edit_rentalcontract")
+    public String editRental_contract(HttpSession session, Model model, @ModelAttribute Rental_contract rental_contract){
+        if(userIsLoggedIn(session)){
+            boolean success = rentalContractService.updateRentalContract(rental_contract);
+            if(success){
+                model.addAttribute("successMessage","Success! Ændringer til lejeaftalen er gemt.");
+            } else {
+                model.addAttribute("errorMessage", "Fejl! Ændringerne til lejeaftalen blev ikke gemt - kontakt admin for hjælp.");
+            }
+            return rental_contract(session,model);
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
      * Method for returning the rental_contract html file address
      * @return string with rental_contract address if user is logged in, else it returns the user to the login page with error message
      * @Author Jonas Jakobsen
@@ -227,6 +377,25 @@ public class HomeController {
         if(userIsLoggedIn(session)){
             List<Rental_contract> rentalContracts = rentalContractService.getAllRentalcontracts();
             model.addAttribute("rental_contract",rentalContracts);
+            return "rental_contract/rental_contract";
+        } else {
+            model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");
+            return "login/loginPage";
+        }
+    }
+
+    /**
+     * Method for handling when user attempts to search for a specific rental contract by id
+     * @param query - (String) user's input in the search bar
+     * @return String - returns the rental contract page with the search result added to model
+     * @Author - Hans Erritzøe
+     */
+    @PostMapping("/rental_contract_search")
+    public String rental_contract_search(@RequestParam String query,HttpSession session, Model model){
+        if(userIsLoggedIn(session)){
+            List<Rental_contract> rentalContracts = rentalContractService.getRentalContractByID(query);
+            model.addAttribute("rental_contract",rentalContracts);
+            model.addAttribute("filterOn", true); //enables displaying the "clear filter" button
             return "rental_contract/rental_contract";
         } else {
             model.addAttribute("loginErrorMessage", "Du er ikke logget ind - log ind for at kunne tilgå denne side.");

@@ -21,7 +21,6 @@
 }
 
 .add_element_button {
-    display: flex;
     white-space: nowrap;
     margin-bottom: 0.3vh;
 }
@@ -34,7 +33,7 @@
     border: none;
     background-color: var(--accent);
     cursor: pointer;
-    transition: background-color 0.3s ease; /*  */
+    transition: background-color 0.3s ease; /* adds a transition effect that makes the color change 'ease' into another color */
     font-weight: bold;
 }
 
@@ -135,6 +134,30 @@ tbody td {
 }
 .table_delete_button:hover {
     background-color: #d55454;
+}
+
+/* Defines the css for status labels in the tables below */
+
+.status {
+    display: inline-block; /* defines the status labels as an inline block, making it not take up the entire space of the datacell */
+    padding: 3px 9px; /* Height then width padding */
+    font-weight: bold;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+}
+
+.status.green {
+    background-color: mediumseagreen;
+}
+
+.status.yellow {
+    background-color: #f1c40f;
+    color: #000;
+}
+
+.status.red {
+    background-color: #e57e7e;
 }
 
 /* Table styling ends here */

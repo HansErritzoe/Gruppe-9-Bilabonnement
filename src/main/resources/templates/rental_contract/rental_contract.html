@@ -25,23 +25,28 @@
                 <button>Opret Lejeaftale</button>
             </a>
         </div>
+        <div id="table_search_div">
+            <form th:action="@{/rental_contract_search}" method="post">
+                <input type="text" name="query" placeholder="Søg på lejeaftale id"/>
+                <button type="submit">Søg</button>
+            </form>
+            <a th:if="${filterOn} == true" th:href="@{/rental_contract}" class="clear_search_button">
+                <button>Ryd filter</button>
+            </a>
+        </div>
         <div id="table_div">
             <table>
                 <thead>
                 <tr>
-                    <th>Leje aftale</th>
-                    <th>Kunde nummer</th>
-                    <th>Bil nummer</th>
+                    <th>Lejeaftale ID</th>
+                    <th>Kunde ID</th>
+                        <th>Bil Vognnummer</th>
+                    <th>Måneds pris</th>
+                    <th>Status</th>
                     <th>Start dato</th>
                     <th>Slut dato</th>
-                    <th>Status</th>
-                    <th>IRK kode</th>
-                    <th>Leasing kode</th>
-                    <th>Måneds pris</th>
                     <th>Betalings status</th>
-                    <th>Afhentnings lokation</th>
-                    <th>Retur lokation</th>
-                    <th>Skadesrapport</th>
+                    <th>Handlinger </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,24 +54,21 @@
                     <td th:text="${rental_contract.getId_rental_contract()}"></td>
                     <td th:text="${rental_contract.getCustomer_id()}"></td>
                     <td th:text="${rental_contract.getCar_vehicle_id()}"></td>
+                    <td th:text="${#numbers.formatDecimal(rental_contract.getPrice_per_month(), 2, 2)} + ' DKK'"></td>
+                    <td th:switch="${rental_contract.status}">
+                        <span th:case="'Started'" class="status green">Startet</span>
+                        <span th:case="'Finished'" class="status red">Afsluttet</span>
+                        <span th:case="'Pending Review'" class="status yellow">Afventer behandling</span>
+                    </td>
                     <td th:text="${rental_contract.getStart_date()}"></td>
                     <td th:text="${rental_contract.getEnd_date()}"></td>
-                    <td th:switch="${rental_contract.status}">
-                        <span th:case="'Started'" class="status started">Startet</span>
-                        <span th:case="'Finished'" class="status finished">Afsluttet</span>
-                        <span th:case="'Pending Review'" class="status pending-review">Afventer behandling</span>
-                    </td>
-                    <td th:text="${rental_contract.getIrk_code()}"></td>
-                    <td th:text="${rental_contract.getLeasing_code()}"></td>
-                    <td th:text="${#numbers.formatDecimal(rental_contract.getPrice_per_month(), 2, 2)} + ' DKK '"></td>
                     <td th:switch="${rental_contract.payment_status}">
-                        <span th:case="'Paid'" class="status started">Betalt</span>
-                        <span th:case="'Unpaid'" class="status finished">Ikke Betalt</span>
+                        <span th:case="'Paid'" class="status green">Betalt</span>
+                        <span th:case="'Unpaid'" class="status yellow">Ikke Betalt</span>
                     </td>
-                    <td th:text="${rental_contract.getPickup_location()}"></td>
-                    <td th:text="${rental_contract.getReturn_location()}"></td>
-                    <td th:if="${rental_contract.id_damage_report != null}"
-                        th:text="${rental_contract.id_damage_report}"></td>
+                    <td>
+                        <a th:href="@{'/rental_contract/edit_rentalcontract/'+${rental_contract.id_rental_contract}}" class="table_edit_button">Rediger</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

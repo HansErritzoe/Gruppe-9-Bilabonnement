@@ -55,8 +55,8 @@
                     <td th:text="${damage_report.date}"></td>
                     <td th:text="${damage_report.filled_by}"></td>
                     <td>
-                        <span th:if="${damage_report.payment_status.equals('Paid')}" class="status paid">Betalt</span>
-                        <span th:if="${damage_report.payment_status.equals('Unpaid')}" class="status unpaid">Ubetalt</span>
+                        <span th:if="${damage_report.payment_status.equals('Paid')}" class="status green">Betalt</span>
+                        <span th:if="${damage_report.payment_status.equals('Unpaid')}" class="status yellow">Ubetalt</span>
                     </td>
                     <td>
                         <a th:href="@{'/damage_report/edit_damage_report'+${damage_report.id_damage_report}}" class="table_edit_button">Rediger</a>

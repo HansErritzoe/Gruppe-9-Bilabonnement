@@ -4,7 +4,7 @@
     <!--
         Author: Jonas Jakobsen
         Created: 6/12-2024
-        Description: Page for adding rental contracts
+        Description: Page for editing a rental contract
         Version: 1.0
       -->
     <div th:replace="~{layout :: common-head}"></div>
@@ -14,95 +14,106 @@
     <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
-        <form th:action="@{/rental_contract/add_rentalcontract}" method="post">
+        <form th:action="@{/rental_contract/edit_rentalcontract}" method="post">
 
             <!-- All fields in a flex container -->
             <div class="form-container">
 
                 <div class="headline_div">
-                    <h1> Tilføj Lejeaftale </h1>
+                    <h1> Rediger Lejeaftale ID: <span th:text="${rental_contract.id_rental_contract}"> </span></h1>
                     <div class="seperator-line"></div>
                 </div>
 
                 <div class="form-row">
                     <label>Kunde ID</label>
-                    <input type="number" name="customer_id" placeholder="Eks: '25'" required>
+                    <input type="number" name="customer_id" th:value="${rental_contract.customer_id}" placeholder="Eks: '25'" required>
                     <p> Indtast kundes ID </p>
                 </div>
 
                 <div class="form-row">
                     <label>Bil-Vognnummer</label>
-                    <input type="number" name="car_vehicle_id" placeholder="Eks: '120'" required>
+                    <input type="number" name="car_vehicle_id" th:value="${rental_contract.car_vehicle_id}" placeholder="Eks: '120'" required>
                     <p> Indtast bilens Vognnummer </p>
                 </div>
 
                 <div class="form-row">
                     <label>Start Dato</label>
-                    <input type="date" name="start_date" placeholder="Eks: '2024-01-01'">
+                    <input type="date" name="start_date" th:value="${rental_contract.start_date}" placeholder="Eks: '2024-01-01'">
                     <p> Indtast lejeaftalens start dato </p>
                 </div>
 
                 <div class="form-row">
                     <label>Slut Dato</label>
-                    <input type="date" name="end_date" placeholder="Eks: '2024-02-01'">
+                    <input type="date" name="end_date" th:value="${rental_contract.end_date}" placeholder="Eks: '2024-02-01'">
                     <p> Indtast lejeaftalens slut dato </p>
                 </div>
 
                 <div class="form-row">
                     <label>Status</label>
                     <select name="status" required>
-                        <option value="Started">Startet</option>
-                        <option value="Finished">Sluttet</option>
-                        <option value="Pending Review">Afventer Review</option>
+                        <option value="Started" th:selected="${rental_contract.status == 'Started'}">Startet</option>
+                        <option value="Finished" th:selected="${rental_contract.status == 'Finished'}">Afsluttet</option>
+                        <option value="Pending Review" th:selected="${rental_contract.status == 'Pending Review'}">Afventer Behandling</option>
                     </select>
                     <p> Vælg status for lejeaftalen </p>
                 </div>
 
                 <div class="form-row">
                     <label>IRK kode</label>
-                    <input type="text" name="irk_code" placeholder="Eks: 'DK-1234-5678-ABCD'">
+                    <input type="text" name="irk_code" th:value="${rental_contract.irk_code}" placeholder="Eks: 'DK-1234-5678-ABCD'">
                     <p> Indtast IRK koden som tilhøre lejeaftalen </p>
                 </div>
 
                 <div class="form-row">
                     <label>Leasing kode</label>
-                    <input type="text" name="leasing_code" placeholder="Eks: 'DK-2024-AB1234'">
+                    <input type="text" name="leasing_code" th:value="${rental_contract.leasing_code}" placeholder="Eks: 'DK-2024-AB1234'">
                     <p> Indtast leasing koden som tilhøre lejeaftalen </p>
                 </div>
 
                 <div class="form-row">
                     <label>KM per Måned</label>
-                    <input type="number" name="km_pr_month" placeholder="Eks: '1500'">
+                    <input type="number" name="km_pr_month" th:value="${rental_contract.km_pr_month}" placeholder="Eks: '1500'">
                     <p> Indtast kundens tilvalgte kilometer om måneden</p>
                 </div>
 
                 <div class="form-row">
                     <label>Pris per måned</label>
-                    <input type="number" name="price_per_month" min="1000" max="25000" placeholder="Eks: '1000'">
+                    <input type="number" name="price_per_month" min="1000" max="25000" th:value="${rental_contract.price_per_month}" placeholder="Eks: '1000'">
                     <p> Indtast lejekontraktens pris per måned (DKK)</p>
                 </div>
 
                 <div class="form-row">
                     <label>Betalt</label>
                     <select name="payment_status">
-                        <option value="Paid">Betalt</option>
-                        <option value="Unpaid">Ikke betalt</option>
+                        <option value="Paid" th:selected="${rental_contract.payment_status == 'Paid'}">Betalt</option>
+                        <option value="Unpaid" th:selected="${rental_contract.payment_status == 'Unpaid'}">Ikke betalt</option>
                     </select>
                     <p> Vælg om lejeaftalen er betalt </p>
                 </div>
 
                 <div class="form-row">
                     <label>Afhentnings lokation</label>
-                    <input type="text" name="pickup_location" placeholder="'Vibeholmsvej 31, 2605 Brøndby'">
+                    <input type="text" name="pickup_location" th:value="${rental_contract.pickup_location}" placeholder="'Vibeholmsvej 31, 2605 Brøndby'">
                     <p> Indtast hvor bilen skal afhentes fra</p>
                 </div>
 
                 <div class="form-row">
                     <label>Afleverings lokation</label>
-                    <input type="text" name="return_location" placeholder="'Vibeholmsvej 31, 2605 Brøndby'">
+                    <input type="text" name="return_location" th:value="${rental_contract.return_location}" placeholder="'Vibeholmsvej 31, 2605 Brøndby'">
                     <p> Indtast hvor bilen skal afleveres til</p>
                 </div>
 
+                <div class="form-row">
+                    <label> Skaderapport ID</label>
+                    <input type="text" name="id_damage_report" th:value="${rental_contract.id_damage_report}" placeholder="'5'">
+                    <p>Tilføj skaderapport ID her, hvis lejeaftalen har en skaderapport tilknyttet, Eks: '5'</p>
+                </div>
+
+                <input type="hidden" name="id_rental_contract" th:value="${rental_contract.id_rental_contract}">
+
+                <!-- adding a filler div to push button to next row -->
+                <div class="filler-div"></div>
+                <div class="filler-div"></div>
                 <button type="submit">Gem</button>
 
             </div>

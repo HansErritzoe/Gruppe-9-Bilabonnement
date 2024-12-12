@@ -9,7 +9,6 @@
       -->
     <script src="http://localhost:35729/livereload.js"></script>
     <div th:replace="~{layout :: common-head}"></div>
-    <link rel="stylesheet" href="/pagespecific/car_inventory.css">
 </head>
 <body>
 <div class="main-content">
@@ -55,10 +54,10 @@
                 <td th:text="${car.model}"></td>
                 <td th:text="${car.year}"></td>
                 <td>
-                    <span th:if="${car.available}" class="status available">Ledig</span>
-                    <span th:if="${!car.available}" class="status rented">Udlejet</span>
+                    <span th:if="${car.available}" class="status green">Ledig</span>
+                    <span th:if="${!car.available}" class="status yellow">Udlejet</span>
                 </td>
-                <td> <!-- Edit car functionality not implemented yet -->
+                <td>
                     <a th:href="@{'/car_inventory/edit_car/'+${car.id_vehicle}}" class="table_edit_button">Rediger</a>
                 </td>
             </tr>
