@@ -64,4 +64,12 @@ public class RentalContractService {
     public boolean updateRentalContract(Rental_contract rentalContract) {
         return rentalcontractRepository.updateRentalContract(rentalContract);
     }
+
+    public int getExpectedRevenue(){
+        return rentalcontractRepository.getExpectedRevenue();
+    }
+
+    public int getHandleTotal(){
+        return rentalcontractRepository.getHandleTotal();
+    }
 }
