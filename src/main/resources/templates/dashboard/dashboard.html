@@ -2,16 +2,32 @@
 <html lang="en">
 <head>
     <div th:replace="~{layout :: common-head}"></div>
+    <link rel="stylesheet" href="/pagespecific/dashboard.css">
 </head>
 <body>
 <div class="main-content">
     <div th:replace="~{layout :: header}"></div>
     <div th:replace="~{layout :: navbar}"></div>
     <div class="content">
-        Rented out: <span th:text="${UnavailableTotal}"></span>
-        Available: <span th:text="${AvailableTotal}"></span>
-        Expected Revenue <span th:text="${ExpectedRevenue}"></span>
-        Handle needed: <span th:text="${HandleTotal}"></span>
+        <h1>Dashboard</h1>
+            <div class="outer">
+                <div class="inner">
+                    <h2> Udlejet biler:</h2><br>
+                    <span th:text="${UnavailableTotal}"></span>
+                </div>
+                <div class="inner">
+                    <h2> Tilgængelig biler:</h2><br>
+                     <span th:text="${AvailableTotal}"></span>
+                </div>
+                <div class="inner">
+                    <h2> indtægt pr måned:</h2><br>
+                    <span th:text="${ExpectedRevenue}"></span>
+                </div>
+                <div class="inner">
+                    <h2> Biler under håndtering:</h2><br>
+                    <span th:text="${HandleTotal}"></span>
+                </div>
+            </div>
     </div>
 </div>
 </body>
