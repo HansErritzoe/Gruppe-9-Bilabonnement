@@ -1,28 +1,28 @@
 .outer {
     display: flex;
     flex-wrap: wrap;
-    background-color: white;
-    padding: 10vh;
+    padding: 5vh;
     border-radius: 20px;
     justify-content: space-between;
-    align-items: center;
     height: 70vh;
 }
 
 .inner{
+    background-color: white;
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 0px 0px 1px #9d9d9d;
-    width: 15vw;
-    height: 15vh;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.1); /* Add's 2 shadows, 1 softer than the other */
+    width: 17vw;
+    height: 30vh;
     gap: 5px;
     align-items: center;
     justify-content: center;
-    font-size: 0.6em;
+    font-size: 1em;
     padding: 10px;
     border-radius: 5px;
+    text-align: center;
 }
 
 .inner span{
-    font-size: 3em;
+    font-size: 2.5em;
 }

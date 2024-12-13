@@ -20,11 +20,11 @@
                      <span th:text="${AvailableTotal}"></span>
                 </div>
                 <div class="inner">
-                    <h2> indtægt pr måned:</h2><br>
-                    <span th:text="${ExpectedRevenue}"></span>
+                    <h2> Indtægt denne måned:</h2><br>
+                    <span th:text="${ExpectedRevenue}+' DKK'"></span>
                 </div>
                 <div class="inner">
-                    <h2> Biler under håndtering:</h2><br>
+                    <h2> Lejeaftaler der afventer behandling:</h2><br>
                     <span th:text="${HandleTotal}"></span>
                 </div>
             </div>
