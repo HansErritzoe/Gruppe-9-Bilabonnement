@@ -49,6 +49,11 @@ public class RentalcontractRepository {
         }
     }
 
+    /**
+     * A method to get the Expected Revenue for the month by getting the prices of all rental Contracts
+     * @return Int - Sum of all price_per_month in rental_contract, or 0 if there arent any
+     * @Author - Jonas Jakobsen
+     */
     public int getExpectedRevenue(){
         String sql = "SELECT SUM(price_per_month) FROM rental_contract";
         Integer total = template.queryForObject(sql, Integer.class);
@@ -57,7 +62,11 @@ public class RentalcontractRepository {
         }
         else return 0;
     }
-
+    /**
+     * Method to get a total of all Rental Contracts that have the status Pending Review
+     * @return Integer - Int containing sum of status with 'Pending Review'
+     * @Author - Jonas Jakobsen
+     * */
     public int getHandleTotal() {
         String sql = "SELECT COUNT(*) FROM rental_contract WHERE status = 'Pending Review'";
         return template.queryForObject(sql, Integer.class);
@@ -79,6 +88,7 @@ public class RentalcontractRepository {
      * Method to return a Rental_contract object from the database based on integer id
      * @param id - integer id of the rental contract to be returned from DB
      * @return Rental_contract - object containing the values of a rental contract from the DB
+     * @Author - Hans Erritzøe
      */
     public Rental_contract getRentalContractByID(int id){
         String sql = "SELECT * FROM rental_contract WHERE id_rental_contract = ?";
@@ -90,6 +100,7 @@ public class RentalcontractRepository {
      * Method to update a rental contract in the database based on the values of a Rental_contact object
      * @param rentalContract - Rental_contract object containing the values to be updated in the DB
      * @return boolean - true if successfully updated, false if failed to update
+     * @Author - Hans Erritzøe
      */
     public boolean updateRentalContract(Rental_contract rentalContract) {
         String sql = "UPDATE rental_contract SET customer_id = ?, car_vehicle_id = ?, start_date = ?, end_date = ?, status = ?, irk_code = ?, leasing_code = ?, km_pr_month = ?, price_per_month = ?, payment_status = ?, pickup_location = ?, return_location = ?, id_damage_report = ? WHERE id_rental_contract = ?";

@@ -65,10 +65,20 @@ public class RentalContractService {
         return rentalcontractRepository.updateRentalContract(rentalContract);
     }
 
+    /**
+     * Calls repository layer to get a int containing the expected revenue for the month
+     * @return int - containing the sum of all price_per_month values in the database
+     * @Author - Jonas Jakobsen
+     */
     public int getExpectedRevenue(){
         return rentalcontractRepository.getExpectedRevenue();
     }
 
+    /**
+     * Calls repository layer to get a int containing all rental contracts that needs handling
+     * @return int - containing all rental_contracts with status 'pending review'
+     * @Author - Jonas Jakobsen
+     */
     public int getHandleTotal(){
         return rentalcontractRepository.getHandleTotal();
     }

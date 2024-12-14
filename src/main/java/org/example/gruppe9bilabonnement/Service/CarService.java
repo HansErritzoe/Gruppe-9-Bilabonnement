@@ -33,8 +33,18 @@ public class CarService {
         return carRepository.getCarsByIdOrVin(query);
     }
 
+    /**
+     * Method to return a int containing the total cars that are rented
+     * @return int - int of all cars with boolean Available false
+     * @Author - Jonas Jakobsen
+     */
     public int getUnavailableTotal(){ return carRepository.getUnavailableTotal();}
 
+    /**
+     * Method to return a int containing the total cars that aren't rented
+     * @return int - int of all cars with boolean Available true
+     * @Author - Jonas Jakobsen
+     */
     public int getAvailableTotal() { return carRepository.getAvailableTotal();}
 
     /**
